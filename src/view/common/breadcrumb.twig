@@ -1,0 +1,13 @@
+<div class="breadcrumb_background">
+    <div class="breadcrumb_nav container">
+        <h2 class="breadcrumb_heading">{{ breadcrumb.title }}</h2>
+        <nav class="breadcrumb">
+            <a class="breadcrumb_link" href="index.php">Главная</a>
+            <a class="breadcrumb_link breadcrumb_float" href="?c=page&act=getCatalog">Каталог</a>
+            <a class="breadcrumb_link breadcrumb_float" href="?c=page&act=showCategoryProducts&category={{ content.good.title_major_category }}&majorCategory={{ content.good.id_major_category }}">
+               {{ content.good.title_major_category }}</a
+            >
+            <p class="breadcrumb_float"> {{ content.good.name_good }}</p>
+        </nav>
+    </div>
+</div>

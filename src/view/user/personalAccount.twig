@@ -1,0 +1,68 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+
+    <div class="breadcrumb_background">
+        <div class="breadcrumb_nav breadcrumb_padding container">
+            <h2 class="breadcrumb_heading">{{ breadcrumb.title }}</h2>
+        </div>
+    </div>
+
+    {# взял блок с формой из страницы регистрации. Названия стилей не менял. Заменил лишь один класс на personalAccount_box  и удалил блок с преимуществами#}
+    <div class="background_page_registration">
+        <section class="personalAccount_box container">
+            <form action="" method="post" id="changePersonalAccount_form" class="registration_form">
+
+                <fieldset class="fieldset_registration" style="margin-bottom: 21px">
+                    <legend class="legend">Информация о вас</legend>
+                    <input required type="text" class="input_field js-field-validation" name="name" placeholder="Ваше имя" value="{{ content.0.user_name }}">
+                    <input required type="text" class="input_field js-field-validation" name="surname" placeholder="Фамилия" value="{{ content.0.user_surname }}">
+                </fieldset>
+
+                <fieldset class="fieldset_registration" style="margin-bottom: 21px">
+                    <legend class="legend">Адрес доставки</legend>
+                    <input required type="text" class="input_field js-field-validation" name="postalAddress" placeholder="Почтовый адрес" value="{{ content.0.postal_address }}" maxlength="400">
+                    <input required type="text" class="input_field js-field-validation" name="postalCode" placeholder="Почтовый индекс" value="{{ content.0.postal_code }}" >
+                    <input required type="text" class="input_field js-field-validation" name="telephone" placeholder="Телефон" value="{{ content.0.telephone }}">
+                </fieldset>
+
+                <fieldset class="fieldset_registration">
+                    <legend class="legend">Способы оплаты</legend>
+                    <input disabled type="text" class="input_field js-field-validation" name="numCard" placeholder="Номер карты" value="" >
+                    <input disabled type="text" class="input_field js-field-validation" name="cardHolder" placeholder="На кого оформлена" value="">
+                    <p class="form_text">Пока оставим пустым :)</p>
+                </fieldset>
+
+                <div class="form_radiobutton">
+                    <input {% if content.0.gender == 'male' %} checked {% endif %} type="radio" id="male" name="gender" value="male" class="radio_buttons">
+                    <label for="male" class="label_buttons">Мужчина</label>
+                    <input {% if content.0.gender == 'female' %} checked {% endif %} type="radio" id="female" name="gender" value="female" class="radio_buttons">
+                    <label for="female" class="label_buttons">Женщина</label>
+                </div>
+
+                <fieldset class="fieldset_registration">
+                    <legend class="legend">Детали аккаунта</legend>
+                    <input disabled required type="text" class="input_field js-field-validation" name="login" placeholder="Логин" value="{{ cookie.login }}">
+                    <input required type="email" class="input_field js-field-validation" name="email" placeholder="Электронная почта" value="{{ content.0.user_email }}">
+                    <input type="password" class="input_field" name="currentPassword" placeholder=" Текущий пароль">
+                    <p class="form_text">Оставьте пустым, если не хотите менять.</p>
+                    <input type="password" class="input_field js-field-validation" name="newPassword" placeholder=" Новый пароль">
+                    <p class="form_text">Пароль должен состоять из минимум 8 символов. Минимум 1 большая буква, 1 цифра, спецсимволы (не обязательно). Оставьте пустым, если не хотите менять.</p>
+
+                        <p class="warning_message"></p>
+
+                </fieldset>
+
+                <button form="changePersonalAccount_form" type="button" class="form_button js-save-change-of-account">
+                    Сохранить изменения <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+
+        </section>
+    </div>
+
+
+
+    {% include 'common/footer.twig' %}
+
+{% endapply %}

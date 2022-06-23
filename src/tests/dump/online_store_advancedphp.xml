@@ -1,0 +1,1325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.0.2
+- https://www.phpmyadmin.net
+-
+- Хост: 127.0.0.1:3306
+- Время создания: Июн 13 2022 г., 18:24
+- Версия сервера: 8.0.19
+- Версия PHP: 7.4.5
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="online_store_advancedphp" collation="utf8mb4_0900_ai_ci" charset="utf8mb4">
+            <pma:table name="baskets">
+                CREATE TABLE `baskets` (
+                  `id_basket` int NOT NULL AUTO_INCREMENT,
+                  `id_user` int DEFAULT NULL,
+                  `id_good` int NOT NULL,
+                  `size` varchar(5) CHARACTER SET ucs2 COLLATE ucs2_general_ci DEFAULT NULL,
+                  `color` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+                  `price` double NOT NULL DEFAULT '0',
+                  `quantity` int NOT NULL,
+                  PRIMARY KEY (`id_basket`),
+                  KEY `id_good` (`id_good`),
+                  KEY `id_user` (`id_user`),
+                  CONSTRAINT `baskets_ibfk_2` FOREIGN KEY (`id_good`) REFERENCES `goods` (`id_good`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="brands_of goods">
+                CREATE TABLE `brands_of goods` (
+                  `id_brand` int NOT NULL AUTO_INCREMENT,
+                  `brand_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  PRIMARY KEY (`id_brand`),
+                  UNIQUE KEY `brand_title` (`brand_title`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="categories">
+                CREATE TABLE `categories` (
+                  `id_category` int NOT NULL AUTO_INCREMENT,
+                  `status` int NOT NULL,
+                  `category_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `id_major_category` int DEFAULT NULL,
+                  PRIMARY KEY (`id_category`),
+                  KEY `parent_id` (`id_major_category`),
+                  CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`id_major_category`) REFERENCES `major_categories` (`id_category`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Внешний ключ для parent_id? Что по умолчанию?';
+            </pma:table>
+            <pma:table name="colors_of_goods">
+                CREATE TABLE `colors_of_goods` (
+                  `id_color` int NOT NULL AUTO_INCREMENT,
+                  `color_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  PRIMARY KEY (`id_color`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="designers">
+                CREATE TABLE `designers` (
+                  `id_designer` int NOT NULL AUTO_INCREMENT,
+                  `designer_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  PRIMARY KEY (`id_designer`),
+                  UNIQUE KEY `designer_name` (`designer_name`) USING BTREE
+                ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="goods">
+                CREATE TABLE `goods` (
+                  `id_good` int NOT NULL AUTO_INCREMENT,
+                  `name_good` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `price` double NOT NULL,
+                  `brand` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                  `id_category` int NOT NULL,
+                  `status` int NOT NULL,
+                  `views` int NOT NULL DEFAULT '0',
+                  PRIMARY KEY (`id_good`),
+                  UNIQUE KEY `name` (`name_good`),
+                  KEY `id_category` (`id_category`),
+                  CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="goods_sizes_colors_brands">
+                CREATE TABLE `goods_sizes_colors_brands` (
+                  `id` int NOT NULL AUTO_INCREMENT,
+                  `id_good` int NOT NULL,
+                  `id_size` int NOT NULL,
+                  `id_color` int NOT NULL,
+                  `id_brand` int NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="major_categories">
+                CREATE TABLE `major_categories` (
+                  `id_category` int NOT NULL AUTO_INCREMENT,
+                  `title_major_category` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                  PRIMARY KEY (`id_category`),
+                  UNIQUE KEY `name` (`title_major_category`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="orders_auth_users">
+                CREATE TABLE `orders_auth_users` (
+                  `id_order` int NOT NULL AUTO_INCREMENT,
+                  `id_user` int NOT NULL,
+                  `additional_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                  `product_id` int NOT NULL,
+                  `product_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                  `product_price` mediumint NOT NULL,
+                  `quantity` double NOT NULL,
+                  `total_price` mediumint NOT NULL,
+                  `category` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+                  `size` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+                  `color` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+                  `datetime_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  `id_order_status` int NOT NULL DEFAULT '1',
+                  PRIMARY KEY (`id_order`),
+                  KEY `id_user` (`id_user`),
+                  KEY `id_order_status` (`id_order_status`),
+                  CONSTRAINT `orders_auth_users_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
+                  CONSTRAINT `orders_auth_users_ibfk_2` FOREIGN KEY (`id_order_status`) REFERENCES `order_statuses` (`id_order_status`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="orders_unauth_users">
+                CREATE TABLE `orders_unauth_users` (
+                  `id_order` int NOT NULL AUTO_INCREMENT,
+                  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `user_surname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `user_email` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `additional_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `product_id` int NOT NULL,
+                  `product_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `product_price` mediumint NOT NULL,
+                  `quantity` int NOT NULL,
+                  `total_price` mediumint NOT NULL,
+                  `category` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+                  `size` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+                  `color` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+                  `datetime_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  `id_order_status` int NOT NULL DEFAULT '1',
+                  PRIMARY KEY (`id_order`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="order_statuses">
+                CREATE TABLE `order_statuses` (
+                  `id_order_status` int NOT NULL AUTO_INCREMENT,
+                  `order_status_name` varchar(50) NOT NULL,
+                  PRIMARY KEY (`id_order_status`),
+                  UNIQUE KEY `order_status_name` (`order_status_name`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="photo_goods">
+                CREATE TABLE `photo_goods` (
+                  `id_photo` int NOT NULL AUTO_INCREMENT,
+                  `path` varchar(60) NOT NULL,
+                  `id_good` int NOT NULL,
+                  PRIMARY KEY (`id_photo`),
+                  UNIQUE KEY `path` (`path`),
+                  KEY `id_good` (`id_good`),
+                  CONSTRAINT `photo_goods_ibfk_1` FOREIGN KEY (`id_good`) REFERENCES `goods` (`id_good`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="role">
+                CREATE TABLE `role` (
+                  `id_role` int NOT NULL AUTO_INCREMENT,
+                  `role_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  PRIMARY KEY (`id_role`),
+                  UNIQUE KEY `role_name` (`role_name`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="sizes_of_goods">
+                CREATE TABLE `sizes_of_goods` (
+                  `id_size` int NOT NULL AUTO_INCREMENT,
+                  `size_title` varchar(5) NOT NULL,
+                  PRIMARY KEY (`id_size`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="subscribers">
+                CREATE TABLE `subscribers` (
+                  `id` int NOT NULL AUTO_INCREMENT,
+                  `email_subscriber` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  PRIMARY KEY (`id`),
+                  UNIQUE KEY `email_subscriber` (`email_subscriber`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="users">
+                CREATE TABLE `users` (
+                  `id_user` int NOT NULL AUTO_INCREMENT,
+                  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+                  `user_surname` varchar(50) DEFAULT NULL,
+                  `gender` varchar(11) DEFAULT NULL,
+                  `user_login` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `user_email` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `user_password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                  `postal_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+                  `postal_code` int DEFAULT NULL,
+                  `telephone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_et_0900_as_cs DEFAULT NULL,
+                  `role` int NOT NULL,
+                  `user_last_action` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                  PRIMARY KEY (`id_user`),
+                  UNIQUE KEY `user_login` (`user_login`),
+                  UNIQUE KEY `user_email` (`user_email`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=922307898 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+            <pma:table name="users_role">
+                CREATE TABLE `users_role` (
+                  `id_role_user` int NOT NULL AUTO_INCREMENT,
+                  `id_user` int NOT NULL,
+                  `id_role` int NOT NULL,
+                  PRIMARY KEY (`id_role_user`),
+                  KEY `id_user` (`id_user`),
+                  KEY `id_role` (`id_role`),
+                  CONSTRAINT `users_role_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
+                  CONSTRAINT `users_role_ibfk_2` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - База данных: 'online_store_advancedphp'
+    -->
+    <database name="online_store_advancedphp">
+        <!-- Таблица baskets -->
+        <!-- Таблица brands_of goods -->
+        <table name="brands_of goods">
+            <column name="id_brand">10</column>
+            <column name="brand_title">Balenciaga</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">3</column>
+            <column name="brand_title">BGN</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">1</column>
+            <column name="brand_title">Brigitte Bardot</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">2</column>
+            <column name="brand_title">Camaïeu</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">11</column>
+            <column name="brand_title">Chanel</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">12</column>
+            <column name="brand_title">Christian Dior</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">7</column>
+            <column name="brand_title">Etam</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">13</column>
+            <column name="brand_title">Givenchy</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">14</column>
+            <column name="brand_title">Hermès</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">4</column>
+            <column name="brand_title">Jules</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">16</column>
+            <column name="brand_title">Kenzo</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">9</column>
+            <column name="brand_title">Kookai</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">15</column>
+            <column name="brand_title">Louis Vuitton</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">17</column>
+            <column name="brand_title">Maison Margiela</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">8</column>
+            <column name="brand_title">Morgan</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">18</column>
+            <column name="brand_title">Nina Ricci</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">5</column>
+            <column name="brand_title">Sisley</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">6</column>
+            <column name="brand_title">Vicolo</column>
+        </table>
+        <table name="brands_of goods">
+            <column name="id_brand">19</column>
+            <column name="brand_title">Yves Saint Laurent</column>
+        </table>
+        <!-- Таблица categories -->
+        <table name="categories">
+            <column name="id_category">1</column>
+            <column name="status">1</column>
+            <column name="category_title">Аксессуары</column>
+            <column name="id_major_category">1</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">2</column>
+            <column name="status">1</column>
+            <column name="category_title">Кошельки</column>
+            <column name="id_major_category">1</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">3</column>
+            <column name="status">1</column>
+            <column name="category_title">Джинсы</column>
+            <column name="id_major_category">1</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">4</column>
+            <column name="status">1</column>
+            <column name="category_title">Футболки</column>
+            <column name="id_major_category">1</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">5</column>
+            <column name="status">1</column>
+            <column name="category_title">Аксессуары</column>
+            <column name="id_major_category">2</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">6</column>
+            <column name="status">1</column>
+            <column name="category_title">Куртки и пальто</column>
+            <column name="id_major_category">2</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">7</column>
+            <column name="status">1</column>
+            <column name="category_title">Поло</column>
+            <column name="id_major_category">2</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">8</column>
+            <column name="status">1</column>
+            <column name="category_title">Футболки</column>
+            <column name="id_major_category">2</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">9</column>
+            <column name="status">1</column>
+            <column name="category_title">Рубашки</column>
+            <column name="id_major_category">2</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">10</column>
+            <column name="status">1</column>
+            <column name="category_title">Аксессуары</column>
+            <column name="id_major_category">3</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">11</column>
+            <column name="status">1</column>
+            <column name="category_title">Кошельки</column>
+            <column name="id_major_category">3</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">12</column>
+            <column name="status">1</column>
+            <column name="category_title">Джинсы</column>
+            <column name="id_major_category">3</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">13</column>
+            <column name="status">1</column>
+            <column name="category_title">Футболки</column>
+            <column name="id_major_category">3</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">14</column>
+            <column name="status">1</column>
+            <column name="category_title">Рубашки</column>
+            <column name="id_major_category">3</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">15</column>
+            <column name="status">1</column>
+            <column name="category_title">Рюкзаки</column>
+            <column name="id_major_category">3</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">16</column>
+            <column name="status">1</column>
+            <column name="category_title">Сумки</column>
+            <column name="id_major_category">2</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">17</column>
+            <column name="status">1</column>
+            <column name="category_title">Обувь</column>
+            <column name="id_major_category">3</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">18</column>
+            <column name="status">1</column>
+            <column name="category_title">Свитера и трикотаж</column>
+            <column name="id_major_category">2</column>
+        </table>
+        <table name="categories">
+            <column name="id_category">19</column>
+            <column name="status">1</column>
+            <column name="category_title">Кепки</column>
+            <column name="id_major_category">1</column>
+        </table>
+        <!-- Таблица colors_of_goods -->
+        <table name="colors_of_goods">
+            <column name="id_color">1</column>
+            <column name="color_title">Белый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">2</column>
+            <column name="color_title">Чёрный</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">3</column>
+            <column name="color_title">Синий</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">4</column>
+            <column name="color_title">Красный</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">5</column>
+            <column name="color_title">Серебряный</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">6</column>
+            <column name="color_title">Золотой</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">7</column>
+            <column name="color_title">Фиолетовый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">8</column>
+            <column name="color_title">Хаки</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">9</column>
+            <column name="color_title">Сиреневый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">10</column>
+            <column name="color_title">Мультиколор</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">11</column>
+            <column name="color_title">Морской волны</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">12</column>
+            <column name="color_title">Бирюзовый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">13</column>
+            <column name="color_title">Серый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">14</column>
+            <column name="color_title">Бронзовый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">15</column>
+            <column name="color_title">Жёлтый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">16</column>
+            <column name="color_title">Коричневый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">17</column>
+            <column name="color_title">Тёмно-серый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">18</column>
+            <column name="color_title">Лайм</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">19</column>
+            <column name="color_title">Голубой</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">20</column>
+            <column name="color_title">Бурый</column>
+        </table>
+        <table name="colors_of_goods">
+            <column name="id_color">21</column>
+            <column name="color_title">Янтарный</column>
+        </table>
+        <!-- Таблица designers -->
+        <table name="designers">
+            <column name="id_designer">2</column>
+            <column name="designer_name">Christian Dior</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">1</column>
+            <column name="designer_name">Coco Chanel</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">10</column>
+            <column name="designer_name">Emanuel Ungaro</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">5</column>
+            <column name="designer_name">Hubert Givenchy</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">7</column>
+            <column name="designer_name">Jacques Fat</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">6</column>
+            <column name="designer_name">Jean-Paul Gaultier</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">8</column>
+            <column name="designer_name">Louis Vuitton</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">4</column>
+            <column name="designer_name">Pierre Cardin</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">9</column>
+            <column name="designer_name">Sonya Rikel</column>
+        </table>
+        <table name="designers">
+            <column name="id_designer">3</column>
+            <column name="designer_name">Yves Saint Laurent</column>
+        </table>
+        <!-- Таблица goods -->
+        <table name="goods">
+            <column name="id_good">34</column>
+            <column name="name_good">Ремень</column>
+            <column name="price">3700</column>
+            <column name="brand">Levi'sⓇ</column>
+            <column name="description">Данный товар является частью проекта Brand planet - специального раздела нашего каталога, где мы собрали экологичные, этичные и благотворительные товары. Компания Levi Strauss &amp; Co. поддерживает социальные проекты и оказывает целевую помощь по всему миру в рамках Фонда Леви Страусса (Levi Strauss Foundation). </column>
+            <column name="id_category">1</column>
+            <column name="status">1</column>
+            <column name="views">20</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">35</column>
+            <column name="name_good">Ремень TheJam5</column>
+            <column name="price">1970</column>
+            <column name="brand">Quiksilver</column>
+            <column name="description">Ремень Quiksilver The Jam имеет двухсторонний дизайн. Металлическая пряжка украшена тисненым логотипом. А открывашка для бутылок дополняет этот стильный аксессуар!</column>
+            <column name="id_category">1</column>
+            <column name="status">1</column>
+            <column name="views">31</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">36</column>
+            <column name="name_good">Ремень брючной</column>
+            <column name="price">3200</column>
+            <column name="brand">Levi'sⓇ</column>
+            <column name="description">Данный товар является частью проекта Brand planet - специального раздела нашего каталога, где мы собрали экологичные, этичные и благотворительные товары. Компания Levi Strauss &amp; Co. поддерживает социальные проекты и оказывает целевую помощь по всему миру в рамках Фонда Леви Страусса (Levi Strauss Foundation). </column>
+            <column name="id_category">1</column>
+            <column name="status">1</column>
+            <column name="views">154</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">37</column>
+            <column name="name_good">Очки солнцезащитные чёрные</column>
+            <column name="price">2390</column>
+            <column name="brand">Vans</column>
+            <column name="description">Очки выполнены в стильном выдержанном черном цвете.
+Особенностями данной модели являются оправы, имеющие форму перевернутой трапеции со скругленными углами и толстый ободок, позволяющий очкам с такой оправой визуально расширять верхнюю часть лица.
+Данная оправа является классической поэтому её можно носить практически с любой одеждой: купальник, джинсы с кроссовками или деловой костюм. Правильно подобранная модель не испортит образ, а лишь внесет особую изюминку и очарование.
+Степень защиты очков UV400 - полная защита глаз от воздействия ультрафиолетового излучения. Имеют поляризационный эффект.</column>
+            <column name="id_category">1</column>
+            <column name="status">1</column>
+            <column name="views">44</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">38</column>
+            <column name="name_good">Очки солнцезащитные </column>
+            <column name="price">2990</column>
+            <column name="brand">Vans</column>
+            <column name="description">Солнцезащитные очки коллекции 2022 года с оправой “Авиатор”.</column>
+            <column name="id_category">1</column>
+            <column name="status">1</column>
+            <column name="views">12</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">39</column>
+            <column name="name_good">Часы Sport 20 Pink</column>
+            <column name="price">4990</column>
+            <column name="brand">Zdk</column>
+            <column name="description">Смарт часы/браслет ZDK Sport 20 Pink. Шагомер, пульсометр, тонометр. Сенсорный дисплей. Уведомление о сообщениях и звонках, Защита от влаги (IP 68). Синхронизация со смартфоном по Bluetooth. Мониторинг сна, счетчик калорий и другие функции. Обратите внимание, что гарантия на товар подтверждается гарантийным талоном. Гарантийный срок товара исчисляется со дня передачи товара потребителю, что подтверждается кассовым чеком, либо уведомлением о вручении при доставке товара по почте.</column>
+            <column name="id_category">1</column>
+            <column name="status">1</column>
+            <column name="views">43</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">40</column>
+            <column name="name_good">Ремешок для часов 20 URB1 SILICONE STRAP S</column>
+            <column name="price">2240</column>
+            <column name="brand">Suunto</column>
+            <column name="description">Подойдет для запястья 120-180 мм в обхвате. Подходит для часов Suunto 3 Fitness. Предназначен для повседневного использования и занятий спортом. </column>
+            <column name="id_category">1</column>
+            <column name="status">1</column>
+            <column name="views">14</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">41</column>
+            <column name="name_good">Перчатки touchscreen NK ACDMY HPRWRM - HO20</column>
+            <column name="price">2999</column>
+            <column name="brand">Nike</column>
+            <column name="description">Перчатки Nike Hyperwarm Academy защищают от холода, позволяя сосредоточиться на игре. Текстурированная область ладоней помогает удобно захватывать мяч, а накладки на кончиках пальцев для работы с сенсорными устройствами позволяют проверить телефон после игры, не снимая перчаток. Силиконовые зоны на пальцах и ладони улучшают сцепление с мячом. Накладки на большом и указательном пальцах для работы с сенсорными устройствами. Эластичные манжеты для надежной посадки.</column>
+            <column name="id_category">5</column>
+            <column name="status">1</column>
+            <column name="views">29</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">42</column>
+            <column name="name_good">Заколки 5 шт.</column>
+            <column name="price">3990</column>
+            <column name="brand">Fiona Franchimon No1 Hairpin</column>
+            <column name="description">Создательница №1 HAIRPIN — Фиона Франшимон — парикмахер-стилист с более чем 20-летним опытом работы на модных показах и съемках
+Фиона разрабатывала конструкцию шпильки в течение двух лет.
+Ей было очень важно получить прочный и гибкий аксессуар для волос, который при этом будет обладать элегантным, но лаконичным скандинавским дизайном.
+Основательница и владелица одного из самых известных в Голландии салонов красоты &quot;Fiona Franchimon Professiona&quot;, среди клиентов которого можно встретить не только звезд, но и королеву Нидерландов.Долгое время Фиона была ассистентом известного стилиста Орбэ Каналеса на многочисленных фэшн-шоу, а сейчас работает над образами для съемок в глянцевых журналах и показов модных домов от Armani до Jacquemus.</column>
+            <column name="id_category">10</column>
+            <column name="status">1</column>
+            <column name="views">142</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">43</column>
+            <column name="name_good"> Ободок и резинка Trendy Treasure Kit</column>
+            <column name="price">4300</column>
+            <column name="brand">Invicibobble</column>
+            <column name="description">Будьте ярче с подарочным набором аксессуаров для волос Invisibobble Trendy Treasure Kit.
+Ободок Invisibobble Hairhalo Trendy Treasure и мягкая резиночка Sprunchie Fade into Fab, выпущенные в коллаборации с ярким британским ювелирным брендом Rosie Fortescue Jewellery, — настоящее украшение для ваших волос.
+Изящная резиночка из мягкой ткани Sprunchie Fade into Fab, выполненная с красочным эффектом градиента, станет акцентной деталью в образе. Внешняя часть ободка Hairhalo Trendy Treasure инкрустирована сверкающими разноцветными фианитами. Трендовые по-детски непосредственные аксессуары добавят образу яркости и озорства.</column>
+            <column name="id_category">10</column>
+            <column name="status">1</column>
+            <column name="views">5</column>
+        </table>
+        <table name="goods">
+            <column name="id_good">44</column>
+            <column name="name_good">Рубашка EDIPO</column>
+            <column name="price">26400</column>
+            <column name="brand">Maxx Mara Leisure</column>
+            <column name="description">Рубашка EDIPO из коллекции бренда MAXMARA. Для выполнения модели мастера бренда использовали смесовый хлопковый материал, произведенный на японских ткацких станках, благодаря которым ткань получилась плотной, но в тоже время легкой с несминаемой текстурой. Изделие имеет украшенные манжетами длинные рукава и кокетку с вытачками на спинке. Застежка на пуговицы.</column>
+            <column name="id_category">9</column>
+            <column name="status">1</column>
+            <column name="views">8</column>
+        </table>
+        <!-- Таблица goods_sizes_colors_brands -->
+        <table name="goods_sizes_colors_brands">
+            <column name="id">1</column>
+            <column name="id_good">34</column>
+            <column name="id_size">2</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">2</column>
+            <column name="id_good">34</column>
+            <column name="id_size">3</column>
+            <column name="id_color">2</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">3</column>
+            <column name="id_good">34</column>
+            <column name="id_size">3</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">4</column>
+            <column name="id_good">34</column>
+            <column name="id_size">2</column>
+            <column name="id_color">5</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">5</column>
+            <column name="id_good">34</column>
+            <column name="id_size">3</column>
+            <column name="id_color">7</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">6</column>
+            <column name="id_good">35</column>
+            <column name="id_size">1</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">7</column>
+            <column name="id_good">35</column>
+            <column name="id_size">1</column>
+            <column name="id_color">2</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">8</column>
+            <column name="id_good">35</column>
+            <column name="id_size">2</column>
+            <column name="id_color">3</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">9</column>
+            <column name="id_good">35</column>
+            <column name="id_size">4</column>
+            <column name="id_color">6</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">10</column>
+            <column name="id_good">35</column>
+            <column name="id_size">7</column>
+            <column name="id_color">2</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">11</column>
+            <column name="id_good">35</column>
+            <column name="id_size">3</column>
+            <column name="id_color">12</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">12</column>
+            <column name="id_good">36</column>
+            <column name="id_size">1</column>
+            <column name="id_color">3</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">13</column>
+            <column name="id_good">36</column>
+            <column name="id_size">2</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">14</column>
+            <column name="id_good">36</column>
+            <column name="id_size">3</column>
+            <column name="id_color">5</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">15</column>
+            <column name="id_good">37</column>
+            <column name="id_size">5</column>
+            <column name="id_color">9</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">16</column>
+            <column name="id_good">37</column>
+            <column name="id_size">4</column>
+            <column name="id_color">17</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">17</column>
+            <column name="id_good">37</column>
+            <column name="id_size">4</column>
+            <column name="id_color">2</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">18</column>
+            <column name="id_good">37</column>
+            <column name="id_size">3</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">19</column>
+            <column name="id_good">38</column>
+            <column name="id_size">2</column>
+            <column name="id_color">3</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">20</column>
+            <column name="id_good">38</column>
+            <column name="id_size">1</column>
+            <column name="id_color">5</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">21</column>
+            <column name="id_good">38</column>
+            <column name="id_size">1</column>
+            <column name="id_color">7</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">22</column>
+            <column name="id_good">38</column>
+            <column name="id_size">1</column>
+            <column name="id_color">9</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">23</column>
+            <column name="id_good">38</column>
+            <column name="id_size">1</column>
+            <column name="id_color">6</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">24</column>
+            <column name="id_good">39</column>
+            <column name="id_size">3</column>
+            <column name="id_color">3</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">25</column>
+            <column name="id_good">39</column>
+            <column name="id_size">2</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">26</column>
+            <column name="id_good">39</column>
+            <column name="id_size">1</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">27</column>
+            <column name="id_good">39</column>
+            <column name="id_size">1</column>
+            <column name="id_color">7</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">28</column>
+            <column name="id_good">40</column>
+            <column name="id_size">1</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">29</column>
+            <column name="id_good">40</column>
+            <column name="id_size">1</column>
+            <column name="id_color">2</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">30</column>
+            <column name="id_good">40</column>
+            <column name="id_size">1</column>
+            <column name="id_color">3</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">31</column>
+            <column name="id_good">40</column>
+            <column name="id_size">1</column>
+            <column name="id_color">4</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">32</column>
+            <column name="id_good">41</column>
+            <column name="id_size">2</column>
+            <column name="id_color">2</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">33</column>
+            <column name="id_good">41</column>
+            <column name="id_size">1</column>
+            <column name="id_color">2</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">34</column>
+            <column name="id_good">41</column>
+            <column name="id_size">2</column>
+            <column name="id_color">4</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">35</column>
+            <column name="id_good">42</column>
+            <column name="id_size">3</column>
+            <column name="id_color">6</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">36</column>
+            <column name="id_good">42</column>
+            <column name="id_size">7</column>
+            <column name="id_color">18</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">37</column>
+            <column name="id_good">43</column>
+            <column name="id_size">2</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">38</column>
+            <column name="id_good">43</column>
+            <column name="id_size">1</column>
+            <column name="id_color">1</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">39</column>
+            <column name="id_good">43</column>
+            <column name="id_size">1</column>
+            <column name="id_color">2</column>
+            <column name="id_brand">0</column>
+        </table>
+        <table name="goods_sizes_colors_brands">
+            <column name="id">40</column>
+            <column name="id_good">43</column>
+            <column name="id_size">2</column>
+            <column name="id_color">4</column>
+            <column name="id_brand">0</column>
+        </table>
+        <!-- Таблица major_categories -->
+        <table name="major_categories">
+            <column name="id_category">4</column>
+            <column name="title_major_category">Аксессуары</column>
+        </table>
+        <table name="major_categories">
+            <column name="id_category">3</column>
+            <column name="title_major_category">Детям</column>
+        </table>
+        <table name="major_categories">
+            <column name="id_category">2</column>
+            <column name="title_major_category">Женщинам</column>
+        </table>
+        <table name="major_categories">
+            <column name="id_category">1</column>
+            <column name="title_major_category">Мужчинам</column>
+        </table>
+        <!-- Таблица orders_auth_users -->
+        <table name="orders_auth_users">
+            <column name="id_order">13</column>
+            <column name="id_user">922307890</column>
+            <column name="additional_info"></column>
+            <column name="product_id">39</column>
+            <column name="product_name">Часы Sport 20 Pink</column>
+            <column name="product_price">4990</column>
+            <column name="quantity">1</column>
+            <column name="total_price">4990</column>
+            <column name="category">Аксессуары</column>
+            <column name="size">S</column>
+            <column name="color">Белый</column>
+            <column name="datetime_create">2022-06-13 14:51:04</column>
+            <column name="id_order_status">1</column>
+        </table>
+        <table name="orders_auth_users">
+            <column name="id_order">14</column>
+            <column name="id_user">922307890</column>
+            <column name="additional_info"></column>
+            <column name="product_id">39</column>
+            <column name="product_name">Часы Sport 20 Pink</column>
+            <column name="product_price">4990</column>
+            <column name="quantity">1</column>
+            <column name="total_price">4990</column>
+            <column name="category">Аксессуары</column>
+            <column name="size">XS</column>
+            <column name="color">Фиолетовый</column>
+            <column name="datetime_create">2022-06-13 14:51:04</column>
+            <column name="id_order_status">1</column>
+        </table>
+        <!-- Таблица orders_unauth_users -->
+        <table name="orders_unauth_users">
+            <column name="id_order">28</column>
+            <column name="user_name">SERGEY</column>
+            <column name="user_surname">FEOKTISTOV</column>
+            <column name="user_email">bbldyk@gmail.com</column>
+            <column name="additional_info">cdcdcdc</column>
+            <column name="product_id">36</column>
+            <column name="product_name">Ремень брючной</column>
+            <column name="product_price">3200</column>
+            <column name="quantity">1</column>
+            <column name="total_price">3200</column>
+            <column name="category">Аксессуары</column>
+            <column name="size">M</column>
+            <column name="color">Серебряный</column>
+            <column name="datetime_create">2022-06-13 16:22:48</column>
+            <column name="id_order_status">1</column>
+        </table>
+        <table name="orders_unauth_users">
+            <column name="id_order">29</column>
+            <column name="user_name">SERGEY</column>
+            <column name="user_surname">FEOKTISTOV</column>
+            <column name="user_email">bbldyk@gmail.com</column>
+            <column name="additional_info">cdcdcdc</column>
+            <column name="product_id">36</column>
+            <column name="product_name">Ремень брючной</column>
+            <column name="product_price">3200</column>
+            <column name="quantity">1</column>
+            <column name="total_price">3200</column>
+            <column name="category">Аксессуары</column>
+            <column name="size">XS</column>
+            <column name="color">Синий</column>
+            <column name="datetime_create">2022-06-13 16:22:48</column>
+            <column name="id_order_status">1</column>
+        </table>
+        <table name="orders_unauth_users">
+            <column name="id_order">30</column>
+            <column name="user_name">SERGEY</column>
+            <column name="user_surname">FEOKTISTOV</column>
+            <column name="user_email">bbldyk@gmail.com</column>
+            <column name="additional_info">cdcdcdc</column>
+            <column name="product_id">37</column>
+            <column name="product_name">Очки солнцезащитные чёрные</column>
+            <column name="product_price">2390</column>
+            <column name="quantity">1</column>
+            <column name="total_price">2390</column>
+            <column name="category">Аксессуары</column>
+            <column name="size">M</column>
+            <column name="color">Белый</column>
+            <column name="datetime_create">2022-06-13 16:22:48</column>
+            <column name="id_order_status">1</column>
+        </table>
+        <table name="orders_unauth_users">
+            <column name="id_order">31</column>
+            <column name="user_name">SERGEY</column>
+            <column name="user_surname">FEOKTISTOV</column>
+            <column name="user_email">bbldyk@gmail.com</column>
+            <column name="additional_info">cdcdcdc</column>
+            <column name="product_id">35</column>
+            <column name="product_name">Ремень TheJam5</column>
+            <column name="product_price">1970</column>
+            <column name="quantity">2</column>
+            <column name="total_price">3940</column>
+            <column name="category">Аксессуары</column>
+            <column name="size">XS</column>
+            <column name="color">Белый</column>
+            <column name="datetime_create">2022-06-13 16:22:48</column>
+            <column name="id_order_status">1</column>
+        </table>
+        <!-- Таблица order_statuses -->
+        <table name="order_statuses">
+            <column name="id_order_status">4</column>
+            <column name="order_status_name">Доставлен</column>
+        </table>
+        <table name="order_statuses">
+            <column name="id_order_status">2</column>
+            <column name="order_status_name">Обработан</column>
+        </table>
+        <table name="order_statuses">
+            <column name="id_order_status">3</column>
+            <column name="order_status_name">Отправлен</column>
+        </table>
+        <table name="order_statuses">
+            <column name="id_order_status">1</column>
+            <column name="order_status_name">Поступил  в обработку</column>
+        </table>
+        <!-- Таблица photo_goods -->
+        <table name="photo_goods">
+            <column name="id_photo">1</column>
+            <column name="path">1-1.jpg</column>
+            <column name="id_good">34</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">2</column>
+            <column name="path">1-2.jpg</column>
+            <column name="id_good">34</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">3</column>
+            <column name="path">1-3.jpg</column>
+            <column name="id_good">34</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">4</column>
+            <column name="path">2-1.jpg</column>
+            <column name="id_good">35</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">5</column>
+            <column name="path">2-2.jpg</column>
+            <column name="id_good">35</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">6</column>
+            <column name="path">2-3.jpg</column>
+            <column name="id_good">35</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">7</column>
+            <column name="path">3-1.jpg</column>
+            <column name="id_good">36</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">8</column>
+            <column name="path">3-2.jpg</column>
+            <column name="id_good">36</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">9</column>
+            <column name="path">3-3.jpg</column>
+            <column name="id_good">36</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">10</column>
+            <column name="path">4-1.jpg</column>
+            <column name="id_good">37</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">11</column>
+            <column name="path">4-2.jpg</column>
+            <column name="id_good">37</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">12</column>
+            <column name="path">4-3.jpg</column>
+            <column name="id_good">37</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">13</column>
+            <column name="path">4-4.jpg</column>
+            <column name="id_good">37</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">14</column>
+            <column name="path">5-1.jpg</column>
+            <column name="id_good">38</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">15</column>
+            <column name="path">5-2.jpg</column>
+            <column name="id_good">38</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">16</column>
+            <column name="path">5-3.jpg</column>
+            <column name="id_good">38</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">17</column>
+            <column name="path">5-4.jpg</column>
+            <column name="id_good">38</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">18</column>
+            <column name="path">6-1.jpg</column>
+            <column name="id_good">39</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">19</column>
+            <column name="path">6-2.jpg</column>
+            <column name="id_good">39</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">20</column>
+            <column name="path">6-3.jpg</column>
+            <column name="id_good">39</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">21</column>
+            <column name="path">6-4.jpg</column>
+            <column name="id_good">39</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">22</column>
+            <column name="path">7-1.jpg</column>
+            <column name="id_good">40</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">23</column>
+            <column name="path">8-1.jpg</column>
+            <column name="id_good">41</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">24</column>
+            <column name="path">8-2.jpg</column>
+            <column name="id_good">41</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">25</column>
+            <column name="path">9-1.jpg</column>
+            <column name="id_good">42</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">26</column>
+            <column name="path">9-2.jpg</column>
+            <column name="id_good">42</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">27</column>
+            <column name="path">10-1.jpg</column>
+            <column name="id_good">43</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">28</column>
+            <column name="path">10-2.jpg</column>
+            <column name="id_good">43</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">29</column>
+            <column name="path">11-1.jpg</column>
+            <column name="id_good">44</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">30</column>
+            <column name="path">11-2.jpg</column>
+            <column name="id_good">44</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">31</column>
+            <column name="path">11-3.jpg</column>
+            <column name="id_good">44</column>
+        </table>
+        <table name="photo_goods">
+            <column name="id_photo">32</column>
+            <column name="path">11-4.jpg</column>
+            <column name="id_good">44</column>
+        </table>
+        <!-- Таблица role -->
+        <table name="role">
+            <column name="id_role">2</column>
+            <column name="role_name">Админ</column>
+        </table>
+        <table name="role">
+            <column name="id_role">1</column>
+            <column name="role_name">Зарегистрированный пользователь</column>
+        </table>
+        <table name="role">
+            <column name="id_role">0</column>
+            <column name="role_name">Незарегистрированный пользователь</column>
+        </table>
+        <!-- Таблица sizes_of_goods -->
+        <table name="sizes_of_goods">
+            <column name="id_size">1</column>
+            <column name="size_title">XS</column>
+        </table>
+        <table name="sizes_of_goods">
+            <column name="id_size">2</column>
+            <column name="size_title">S</column>
+        </table>
+        <table name="sizes_of_goods">
+            <column name="id_size">3</column>
+            <column name="size_title">M</column>
+        </table>
+        <table name="sizes_of_goods">
+            <column name="id_size">4</column>
+            <column name="size_title">L</column>
+        </table>
+        <table name="sizes_of_goods">
+            <column name="id_size">5</column>
+            <column name="size_title">XL</column>
+        </table>
+        <table name="sizes_of_goods">
+            <column name="id_size">6</column>
+            <column name="size_title">XXL</column>
+        </table>
+        <table name="sizes_of_goods">
+            <column name="id_size">7</column>
+            <column name="size_title">XXXL</column>
+        </table>
+        <!-- Таблица subscribers -->
+        <table name="subscribers">
+            <column name="id">4</column>
+            <column name="email_subscriber">b@mail.ru</column>
+        </table>
+        <table name="subscribers">
+            <column name="id">1</column>
+            <column name="email_subscriber">bbldyk@mail.ru</column>
+        </table>
+        <!-- Таблица users -->
+        <table name="users">
+            <column name="id_user">922307890</column>
+            <column name="user_name">SERGEY</column>
+            <column name="user_surname">FEOKTISTOV</column>
+            <column name="gender">male</column>
+            <column name="user_login">bbldyk2</column>
+            <column name="user_email">bbldyk@google.ru</column>
+            <column name="user_password">a99932af71607381e99d50536661db42</column>
+            <column name="postal_address">Оренбургская область, Тоцкий район, Totskoe-10000-1</column>
+            <column name="postal_code">2158051</column>
+            <column name="telephone">89107721712</column>
+            <column name="role">1</column>
+            <column name="user_last_action">2022-06-13 19:13:19</column>
+        </table>
+        <table name="users">
+            <column name="id_user">922307897</column>
+            <column name="user_name">Сергей</column>
+            <column name="user_surname">Феоктистов</column>
+            <column name="gender">male</column>
+            <column name="user_login">serg</column>
+            <column name="user_email">babka@mail.ru</column>
+            <column name="user_password">a99932af71607381e99d50536661db42</column>
+            <column name="postal_address">NULL</column>
+            <column name="postal_code">NULL</column>
+            <column name="telephone">NULL</column>
+            <column name="role">1</column>
+            <column name="user_last_action">2022-06-08 21:37:10</column>
+        </table>
+        <!-- Таблица users_role -->
+        <table name="users_role">
+            <column name="id_role_user">1</column>
+            <column name="id_user">922307890</column>
+            <column name="id_role">1</column>
+        </table>
+    </database>
+</pma_xml_export>

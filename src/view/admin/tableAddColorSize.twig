@@ -1,0 +1,45 @@
+<div class="addColorSize__table_wrap">
+    <h2 class="addColorSize__heading">Добавить товару цвета и размеры</h2>
+
+    <table class="addColorSize">
+        <thead>
+        <tr>
+            <th>ID товара</th>
+            <th>Цвет</th>
+            <th>Размер</th>
+            <th>Добавить</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <select required name="idGoodAdd" class="select_item" >
+                    {% for id in content.allIdGoods %}
+                        <option class="option_item" value="{{ id.id_good }}">{{ id.id_good }}</option>
+                    {% endfor %}
+
+                </select>
+            </td>
+            <td>
+                <select required name="colorAdd" class="select_item" >
+                    {% for color in content.allColors %}
+                        <option class="option_item" value="{{ color.id_color }}">{{ color.color_title }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select required name="sizeAdd" class="select_item" >
+                    {% for size in content.allSizes %}
+                        <option class="option_item" value="{{ size.id_size }}">{{ size.size_title }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                {# Функция назодится в файле AJAX #}
+                <button type="button" class="addColorSize__button" onclick="addColorSizeForGood(event)">Добавить</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>

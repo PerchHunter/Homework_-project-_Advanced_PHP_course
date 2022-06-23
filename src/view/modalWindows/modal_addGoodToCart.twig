@@ -1,0 +1,39 @@
+<div class="modal" id="js-addToCartModalWindow">
+    <svg class="modal__cross js-modal-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
+    <p class="modal__title">Выберите цвет, размер и количество.<br> В зависимости от выбранного цвета вы увидите имеющиеся размеры</p>
+
+    <form action="" method="post" class="product_box_bottom" id="js-modal_add_to_cart-form">
+        <div class="select_block">
+            <select form="modal_add_to_cart" required name="color" class="select_item" onchange="updateSizesInSelect(event, 'modalWindow')">
+{#                <option selected disabled class="option_item" value="">Цвет</option>#}
+{#                {% set colors = content.good.colors ?? good.colors %}#}
+{#                {% for color in colors|split(',') %}#}
+{#                    <option class="option_item" value="{{ color }}">{{ color }}</option>#}
+{#                {% endfor %}#}
+            </select>
+        </div>
+        <div class="select_block">
+            <select form="modal_add_to_cart" required name="size" class="select_item" >
+{#                <option selected disabled class="option_item" value="">Размер</option>#}
+{#                {% set sizes = content.good.sizes ?? good.sizes %}#}
+{#                {% for size in sizes|split(',') %}#}
+{#                    <option class="option_item" value="{{ size }}">{{ size }}</option>#}
+{#                {% endfor %}#}
+            </select>
+        </div>
+        <div class="add_to_cart_from_product_page">
+            <select form="modal_add_to_cart" required name="quantity" class="select_item">
+                <option selected disabled class="option_item" value="">Количество</option>
+                <option class="option_item" value="1">1</option>
+                <option class="option_item" value="2">2</option>
+                <option class="option_item" value="3">3</option>
+                <option class="option_item" value="4">4</option>
+                <option class="option_item" value="5">5</option>
+            </select>
+        </div>
+    </form>
+
+    <button type="button" class="button_of_modal_window" name="modalAddToCartButton" form="modal_add_to_cart">
+        Добавить в корзину
+    </button>
+</div>

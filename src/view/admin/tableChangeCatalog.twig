@@ -1,0 +1,102 @@
+<div class="changeCatalog__table_wrap">
+    <h2 class="changeCatalog__heading">Каталог товаров</h2>
+
+    <table class="tableChangeCatalog">
+        <thead>
+        <tr>
+            <th>ID товара</th>
+            <th>Название товара</th>
+            <th>Цена</th>
+            <th>Бренд</th>
+            <th>Описание</th>
+            <th>Фото товара</th>
+            <th>Размеры</th>
+            <th>Цвета</th>
+            <th>ID категории</th>
+            <th>Статус товара</th>
+            <th>Просмотры товара (подкрутить ;))</th>
+            <th>Сохранить изменения</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for good in content.goods %}
+            <tr id="js-row-{{ good.id_good }}">
+                <td>{{ good.id_good }}</td>
+                <td>
+                            <textarea
+                                    wrap="soft"
+                                    class="tableChangeCatalog__textarea"
+                                    name="name_good">{{ good.name_good }}</textarea>
+                </td>
+                <td>
+                    <input
+                            type="number"
+                            step="0.1"
+                            min="1"
+                            value="{{ good.price }}"
+                            class="tableChangeCatalog__input"
+                            name="price"/>
+                </td>
+                <td>
+                            <textarea
+                                    wrap="soft"
+                                    class="tableChangeCatalog__textarea"
+                                    name="brand">{{ good.brand }}</textarea>
+                </td>
+                <td>
+                            <textarea
+                                    wrap="soft"
+                                    class="tableChangeCatalog__textarea"
+                                    name="description">{{ good.description }}</textarea>
+                </td>
+                <td>{{ good.photos }}</td>
+                <td>{{ good.sizes }}</td>
+                <td>{{ good.colors }}</td>
+                <td>
+                    <input
+                            type="number"
+                            step="1"
+                            min="1"
+                            value="{{ good.id_category }}"
+                            class="tableChangeCatalog__input"
+                            name="id_category"/>
+                </td>
+                <td>
+                    <input
+                            type="number"
+                            step="1"
+                            min="1"
+                            max="2"
+                            value="{{ good.status }}"
+                            class="tableChangeCatalog__input"
+                            name="status"/>
+                </td>
+                <td>
+                    <input
+                            type="number"
+                            step="1"
+                            min="0"
+                            value="{{ good.views }}"
+                            class="tableChangeCatalog__input"
+                            name="views"/>
+                </td>
+                <td>
+                    {# Функция назодится в файле AJAX #}
+                    <button type="button" name="saveChangeOfGood" value="{{ good.id_good }}" class="tableChangeCatalog__button" onclick="saveChangeOfGood(event)">Изменить</button>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <div class="changeCatalog__note">
+        <h3 class="note__heading">Cтатусы товара:
+        </h3>
+        <ul class="note__list">
+            <li>1 - В наличии</li>
+            <li>2 - Нет на складе (не отображается в каталоге покупателям)</li>
+        </ul>
+    </div>
+</div>

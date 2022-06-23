@@ -1,0 +1,70 @@
+        <footer class="footer">
+            <div class="background_footer">
+                <section class="feedback">
+                    <div class="feedback_box container">
+                        <figure class="comment">
+                            <img src="images/different_image/Intersect.png" alt="photo"/>
+                            <figcaption class="comment_text">
+                                "Это мой любимый магазин! Красивая одежда, быстрая доставка и, если что, техподдержка всегда на связи"
+                            </figcaption>
+                        </figure>
+                        <div class="subscribe">
+                            <div class="subscribe_text">
+                                <h2 class="subscribe_head">Подпишись</h2>
+                                <p class="subscribe_text_p">Чтобы узнавать об акциях и новинках</p>
+                            </div>
+                            <form action="" method="post" class="form_email " id="subscribe_form">
+                                <input
+                                        required
+                                        class="input_email js-field-validation js-subscribe-input"
+                                        type="email"
+                                        name="email"
+                                        placeholder="Enter Your Email"
+                                />
+                                <button
+                                        class="button_email js-subscribe-button"
+                                        type="button"
+                                        form="subscribe_form"
+                                        data-modal="message-of-subscribe"
+                                >
+                                    Подписаться
+                                </button>
+                            </form>
+
+                            {% include 'modalWindows/modal_subscribe.twig' %}
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="footer_copyright">
+                <div class="copyright container">
+                    <p class="copyright_text">&copy; {{ "now"|date("Y") }} Все права защищены.</p>
+                    <nav class="footer_links">
+                        <a href="https://vk.com/speedcuber_67rus" class="links"
+                        ><span class="fa fa-vk" aria-hidden="true"></span>
+                        </a>
+                        <a href="https://www.instagram.com/feoktistov_life/" class="links"
+                        ><span class="fa fa-instagram" aria-hidden="true"></span>
+                        </a>
+                        <a href="https://github.com/PerchHunter" class="links"
+                        ><span class="fa fa-github" aria-hidden="true"></span>
+                        </a>
+                        <a href="https://ok.ru/profile/584682468262" class="links"
+                        ><span class="fa fa-odnoklassniki-square" aria-hidden="true"></span
+                            ></a>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+
+        {% include 'modalWindows/overlay.twig' %}
+
+        <script defer type="text/javascript" src="js/cookie.js"></script>
+        <script defer type="text/javascript" src="js/AJAX.js"></script>
+        <script defer type="text/javascript" src="js/fieldValidation.js"></script>
+        <script defer type="text/javascript" src="js/manageCart.js"></script>
+        <script defer type="text/javascript" src="js/eventListeners.js"></script>
+    </body>
+</html>

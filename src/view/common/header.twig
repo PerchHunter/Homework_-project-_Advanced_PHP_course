@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <link rel="icon" href="images/different_image/favicon.ico">
+
+   <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+
+</head>
+
+<body>
+<header class="header">
+    <div class="header_box container">
+        <div class="header_left">
+            <a href="index.php" class="logo"
+            ><img src="images/different_image/logo.svg" alt="logo"
+                /></a>
+            <form action="#" class="search_field" id="header_search">
+                <button
+                        class="button_search_field"
+                        type="button"
+                        form="header_search"
+                >
+                    <span class="fa fa-search fa-2x" aria-hidden="true"></span>
+                </button>
+                <input
+                        type="search"
+                        id="search"
+                        placeholder="Enter the product name..."
+                        autocomplete="off"
+                />
+            </form>
+        </div>
+
+        <div class="header_right">
+            <nav class="menu">
+                <a class="header_right_link" href="#"
+                ><img src="images/different_image/menu.svg" alt="menu"/></a>
+                <div class="menu_box menu_box_categories">
+                    <h2 class="menu_box_heading">Меню</h2>
+                    <div class="menu_box_item">
+                        <h3 class="item_heading">Мужчинам</h3>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Мужчинам&majorCategory=1&id_category=1">Аксессуары</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Мужчинам&majorCategory=1&id_category=2">Кошельки</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Мужчинам&majorCategory=1&id_category=3">Джинсы</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Мужчинам&majorCategory=1&id_category=4">Футболки</a>
+                    </div>
+                    <div class="menu_box_item">
+                        <h3 class="item_heading">Женщинам</h3>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Женщинам&majorCategory=2&id_category=5">Аксессуары</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Женщинам&majorCategory=2&id_category=6">Куртки и пальто</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Женщинам&majorCategory=2&id_category=7">Поло</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Женщинам&majorCategory=2&id_category=8">Футболки</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Женщинам&majorCategory=2&id_category=9">Рубашки</a>
+                    </div>
+                    <div class="menu_box_item">
+                        <h3 class="item_heading">Детям</h3>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Детям&majorCategory=3&id_category=10">Аксессуары</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Детям&majorCategory=3&id_category=11">Кошельки</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Детям&majorCategory=3&id_category=12">Джинсы</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Детям&majorCategory=3&id_category=13">Футболки</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Детям&majorCategory=3&id_category=14">Рубашки</a>
+                        <a class="item_link" href="?c=page&act=showCategoryProducts&category=Детям&majorCategory=3&id_category=15">Рюкзаки</a>
+                    </div>
+                </div>
+            </nav>
+            <nav class="menu">
+                <a class="header_right_link header_home" href="{% if cookie.login == null %}#{% else %}?c=user&act=personalAccount{% endif %}"
+                ><img src="images/different_image/personal_account.svg" alt="account"/></a>
+                <div class="menu_box menu_box_auth">
+                    <h2 class="menu_box_heading">Личный кабинет <span class="menu_box_heading_login">{{ cookie.login }}</span></h2>
+                        <div class="menu_box_item  js-auth-menu-box-item">
+                            {% if cookie.login == null %}
+                            <a class="item_link" href="?c=user&act=registration">Зарегистрироваться</a>
+                            <a class="item_link" href="?c=user&act=auth">Войти</a>
+                            {% else %}
+                            <a class="item_link js-open-modal-exit-from-system" href="#" data-modal="exit-from-system">Выйти из системы</a>
+                            {% endif %}
+                        </div>
+                </div>
+            </nav>
+
+            <a class="header_cart js-open-modal-cart" data-modal="message-of-empty-cart" href="?c=cart">
+                <span class="count_goods"></span>
+                <img src="images/different_image/basket.svg" alt="basket"/>
+            </a>
+        </div>
+    </div>
+</header>
+
+{#панель администратора#}
+{% if session.role == 2 %}
+    {% include 'admin/adminPanel.twig' %}
+{% endif %}
+
+{#модальное окно. Появляется при клике на корзину, когда она пуста#}
+{% include 'modalWindows/modal_messageOfEmptyCart.twig' %}
+
+{#модалка с вопросом при выходе из системы. Импортируется если юзер авторизован#}
+{% if cookie.login != null %}
+{% include 'modalWindows/modal_exitFromSystem.twig' %}
+{% endif %}

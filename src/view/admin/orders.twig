@@ -1,0 +1,110 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+
+    <div class="backgroundPage_orders">
+        <form action="" method="post" id="saveChangeOfOrders" class="orders__form_saveChangeOfOrders"></form>
+
+        {% if get.users is same as('authUsers') %}
+            <h2 class="orders__heading">Заказы зарегистрированных покупателей</h2>
+        {% elseif get.users is same as('unauthUsers') %}
+            <h2 class="orders__heading">Заказы НЕзарегистрированных покупателей</h2>
+        {% endif %}
+
+        {% if message %}
+            <p class="orders__message" style="color: #9abbe9">{{ message }}</p>
+        {% endif %}
+
+        <div class="orders__tableOrders_wrap">
+            <table class="tableOrders">
+                <thead>
+                <tr>
+                    <th>ID заказа</th>
+
+                    {% if get.users == 'authUsers' %}
+                        <th>ID покупателя</th>
+                    {% elseif get.users == 'unauthUsers' %}
+                        <th>Имя покупателя</th>
+                        <th>Фамилия</th>
+                        <th>Email</th>
+                    {% endif %}
+
+                    <th>Доп. информация</th>
+                    <th>ID товара</th>
+                    <th>Название товара</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Итого(цена)</th>
+                    <th>Назв. категории</th>
+                    <th>Размер</th>
+                    <th>Цвет</th>
+                    <th>Дата заказа</th>
+                    <th>Статус заказа</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for order in content %}
+                    <tr>
+                        <td>{{ order.id_order }}</td>
+
+                        {% if get.users == 'authUsers' %}
+                            <td>{{ order.id_user }}</td>
+                        {% elseif get.users == 'unauthUsers' %}
+                            <td>{{ order.user_name }}</td>
+                            <td>{{ order.user_surname }}</td>
+                            <td>{{ order.user_email }}</td>
+                        {% endif %}
+
+                        <td>{{ order.additional_info }}</td>
+                        <td>{{ order.product_id }}</td>
+                        <td>{{ order.product_name }}</td>
+                        <td>{{ order.product_price }}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td>{{ order.total_price }}</td>
+                        <td>{{ order.category }}</td>
+                        <td>{{ order.size }}</td>
+                        <td>{{ order.color }}</td>
+                        <td>{{ order.datetime_create }}</td>
+                        <td>
+                            <input
+                                    type="number"
+                                    step="1"
+                                    min="0"
+                                    max="7"
+                                    value="{{ order.id_order_status }}"
+                                    class="tableOrders__input"
+                                    title="Изменить статус заказа"
+                                    form="saveChangeOfOrders"
+                                    onchange="{this.setAttribute('name',{{ order.id_order }})}"
+                            />
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <button type="button" data-modal="saveChange" class="buttonSaveChange js-buttonSaveChange">Сохранить изменения</button>
+
+        <div class="orders__note">
+            <h3 class="note__heading">Примечание:  статусы заказа
+            </h3>
+            <ul class="note__list">
+                <li>0 - Отклонён</li>
+                <li>1 - Поступил  в обработку</li>
+                <li>2 - Обработан</li>
+                <li>3 - Передан на склад для комплектации</li>
+                <li>4 - Готов к отправке покупателю</li>
+                <li>5 - Отправлен</li>
+                <li>6 - Доставлен</li>
+                <li>7 - Возврат покупателем</li>
+            </ul>
+        </div>
+    </div>
+
+    {% include 'modalWindows/modal_saveChange_forAdmin.twig' %}
+
+    {% include 'common/footer.twig' %}
+{% endapply %}

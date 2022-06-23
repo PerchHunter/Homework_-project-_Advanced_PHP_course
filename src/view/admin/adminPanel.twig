@@ -1,0 +1,33 @@
+<div class="adminPanel_background">
+    <div class="adminPanel__wrap container">
+        <h2 class="adminPanel__heading">Панель админа</h2>
+        <nav class="adminPanel__nav">
+
+            {% if get.users is same as('authUsers') %}
+                <a class="adminPanel__nav__link" href="?c=admin&act=getOrders&users=unauthUsers">
+                    <button type="button" class="link__button">
+                        Заказы незарег-х покупателей
+                    </button>
+                </a>
+            {% elseif get.users is same as('unauthUsers') %}
+                <a class="adminPanel__nav__link" href="?c=admin&act=getOrders&users=authUsers">
+                    <button type="button" class="link__button">
+                        Заказы зарег-х покупателей
+                    </button>
+                </a>
+            {% else %}
+                <a class="adminPanel__nav__link" href="?c=admin&act=getOrders&users=authUsers">
+                    <button type="button" class="link__button">
+                        Заказы
+                    </button>
+                </a>
+            {% endif %}
+
+            <a class="adminPanel__nav__link" href="?c=admin&act=changeCatalog">
+                <button type="button"  class="link__button">
+                    Изменить каталог
+                </button>
+            </a>
+        </nav>
+    </div>
+</div>

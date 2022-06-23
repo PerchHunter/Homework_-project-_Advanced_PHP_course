@@ -1,0 +1,119 @@
+<div class="addGoodInCatalog__table_wrap">
+    <h2 class="addGoodInCatalog__heading">Добавить товар в каталог</h2>
+    {# хотел сделать добавление  нового товара поинтереснее, с помощью события formdata, но не получилось. Закоммент. код в файле AJAX #}
+    {# была ошибка networkerror when attempting to fetch resource. #}
+    <form action="" method="post" id="addGoodInCatalog" enctype="multipart/form-data"></form>
+
+    {% if message %}
+        <p class="orders__message" style="color: #9abbe9">{{ message }}</p>
+    {% endif %}
+
+    <table class="addGoodInCatalog">
+        <thead>
+        <tr>
+            <th>Название товара</th>
+            <th>Цена</th>
+            <th>Бренд</th>
+            <th>Описание</th>
+            <th>Большие фото (535х624)</th>
+            <th>Маленькие фото (360х420)</th>
+            <th>Главная категория</th>
+            <th>Подкатегория</th>
+            <th>Статус товара</th>
+            <th>Просмотры товара (подкрутить ;))</th>
+            <th>Сохранить</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td>
+                <textarea
+                        required
+                        wrap="soft"
+                        class="addGoodInCatalog__textarea"
+                        form="addGoodInCatalog"
+                        name="name_good"></textarea>
+            </td>
+            <td>
+                <input
+                        required
+                        type="number"
+                        step="0.1"
+                        min="1"
+                        class="addGoodInCatalog__input"
+                        form="addGoodInCatalog"
+                        name="price"/>
+            </td>
+            <td>
+                <textarea
+                        required
+                        wrap="soft"
+                        class="addGoodInCatalog__textarea"
+                        form="addGoodInCatalog"
+                        name="brand"></textarea>
+            </td>
+            <td>
+                <textarea
+                        required
+                        wrap="soft"
+                        class="addGoodInCatalog__textarea"
+                        form="addGoodInCatalog"
+                        name="description"></textarea>
+            </td>
+            <td><input required type="file" form="addGoodInCatalog" name="bigPhoto[]" multiple accept="image/jpeg"></td>
+            <td><input required type="file" form="addGoodInCatalog" name="smallPhoto[]" multiple accept="image/jpeg"></td>
+            <td>
+                {# Функция назодится в файле AJAX #}
+                <select form="addGoodInCatalog" required name="majorCategory" class="select_item"  onchange="updateCategoryWhenAddProduct(event)">
+                    <option selected disabled class="option_item" value="">Гл. категория</option>
+                    {% for majCat in content.majorCategories %}
+                        <option class="option_item" value="{{ majCat.id_category }}">{{ majCat.id_category }}-{{ majCat.title_major_category }}</option>
+                    {% endfor %}
+
+                </select>
+            </td>
+            <td>
+                <select form="addGoodInCatalog" required name="category" class="select_item">
+                    <option selected disabled class="option_item" value="">Категория</option>
+                    {% for cat in content.categories %}
+                        <option class="option_item" value="{{ cat.id_category }}">{{ cat.id_category }}-{{ cat.category_title }}-{{ cat.id_major_category }}</option>
+                    {% endfor %}
+
+                </select>
+            </td>
+            <td>
+                <input
+                        required
+                        type="number"
+                        step="1"
+                        min="1"
+                        max="2"
+                        form="addGoodInCatalog"
+                        class="addGoodInCatalog__input"
+                        name="status"/>
+            </td>
+            <td>
+                <input
+                        required
+                        type="number"
+                        step="1"
+                        min="0"
+                        form="addGoodInCatalog"
+                        class="addGoodInCatalog__input"
+                        name="views"/>
+            </td>
+            <td>
+                {# Функция назодится в файле AJAX #}
+                <button type="submit" class="addGoodInCatalog__button" form="addGoodInCatalog">Добавить</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <div class="changeCatalog__note">
+        <h3 class="note__heading">Примечание: фото формата jpg или jpeg (в будущем сделаю механизм конвертации изображения в jpeg ). В заголовках столбцов указаны рекомендуемые разрешения. Грузить одинаковое количество больших и уменьшенных фото
+        </h3>
+    </div>
+</div>

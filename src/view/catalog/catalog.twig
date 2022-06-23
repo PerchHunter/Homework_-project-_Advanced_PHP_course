@@ -1,0 +1,42 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+
+    <div class="breadcrumb_background">
+        <div class="breadcrumb_nav container">
+            <h2 class="breadcrumb_heading">{{ breadcrumb.title }}</h2>
+            <nav class="breadcrumb">
+                <a class="breadcrumb_link" href="index.php">Главная</a>
+                <a class="breadcrumb_link breadcrumb_float" href="?c=page&act=getCatalog">Каталог</a>
+                {% if get.category %}
+                    <p class="breadcrumb_float"> {{ get.category }}</p>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+    
+    <div class="background_page_catalog">
+
+        {% include 'catalog/filters.twig' %}
+
+        <div class="container">
+            <section class="card_box_catalog">
+                {% if message != null %}
+                    <h2 class="message_for_user">{{ message }}</h2>
+                {% else %}
+
+                    {% for good in content %}
+                    {% include 'common/productCard.twig' %}
+                    {% endfor %}
+
+                    {% include 'modalWindows/modal_addGoodToCart.twig' %}
+
+                    {% include 'catalog/pagination.twig' %}
+                {% endif %}
+            </section>
+        </div>
+    </div>
+
+    {% include 'common/footer.twig' %}
+
+{% endapply %}

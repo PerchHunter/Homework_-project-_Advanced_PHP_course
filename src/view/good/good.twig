@@ -1,0 +1,77 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+    {% include 'common/breadcrumb.twig' %}
+    {% include 'good/carousel.twig' %}
+
+    <div class="background_page_product">
+        <div class="product_info container">
+            <article class="product_box_top">
+                <h2 class="chapter_name">Новая коллекция</h2>
+                <hr class="product_small_line">
+                <h3 class="product_name">{{content.good.name | upper}}</h3>
+                <p class="product_description">{{content.good.description}}</p>
+                <h2 class="product_price">{{content.good.price}} &#8381;</h2>
+                <hr class="product_big_line">
+            </article>
+
+            <form action="" method="post" class="product_box_bottom" id="js-add_to_cart_from_product_page-form" data-id="{{ content.good.id_good }}" data-category="{{ content.good.id_category }}" data-sizes="{{ content.good.sizes }}" data-colors="{{ content.good.colors }}" data-price="{{ content.good.price }}">
+                <div class="select_block">
+                    <select form="add_to_cart_from_product_page" required name="color" class="select_item" onchange="updateSizesInSelect(event, 'productPage')">
+                        <option selected disabled class="option_item" value="">Цвет</option>
+                        {% set colors = content.good.colors|split(',') %}
+                        {% for color in colors %}
+                        <option class="option_item" value="{{ color }}">{{ color }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="select_block">
+                    <select form="add_to_cart_from_product_page" required name="size" class="select_item">
+                        <option selected disabled class="option_item" value="">Размер</option>
+                        {% set sizes = content.good.sizes|split(',') %}
+                        {% for size in sizes %}
+                            <option class="option_item" value="{{ size }}">{{ size }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="add_to_cart_from_product_page">
+                    <select form="add_to_cart_from_product_page" required name="quantity" class="select_item">
+                        <option selected disabled class="option_item" value="">Количество</option>
+                        <option class="option_item" value="1">1</option>
+                        <option class="option_item" value="2">2</option>
+                        <option class="option_item" value="3">3</option>
+                        <option class="option_item" value="4">4</option>
+                        <option class="option_item" value="5">5</option>
+                    </select>
+                </div>
+            </form>
+
+            <button type="button" class="product_add js_addToCartFromProductPage" form="add_to_cart_from_product_page">
+                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+                <p class="product_add_text">Добавить в корзину</p>
+            </button>
+            <p class="warning_message">{{ message }}</p>
+
+        </div>
+
+
+        {% if content.similarGoods != null %}
+            <section class="catalog_box container">
+                <h2 class="catalog_head">Возможно вам понравятся</h2>
+                <p class="catalog_text">Вот ещё несколько популярных товаров из этой категории</p>
+                <div class="card_box_catalog">
+
+                    {% for good in content.similarGoods %}
+                        {% include 'common/productCard.twig' %}
+                    {% endfor %}
+
+                    {% include 'modalWindows/modal_addGoodToCart.twig' %}
+
+                </div>
+            </section>
+        {% endif %}
+    </div>
+
+    {% include 'common/footer.twig' %}
+
+{% endapply %}

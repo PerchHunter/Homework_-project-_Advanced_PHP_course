@@ -1,0 +1,1 @@
+<?php	session_start();	require_once '../configurations/autoload.php';	try{		App::init();	}	catch (Exception $e){		die($e->getMessage());	}

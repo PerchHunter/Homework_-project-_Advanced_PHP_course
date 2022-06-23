@@ -1,0 +1,128 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+
+    <div class="breadcrumb_background">
+        <div class="breadcrumb_nav breadcrumb_padding container">
+            <h2 class="breadcrumb_heading">{{ breadcrumb.title }}</h2>
+        </div>
+    </div>
+
+
+    <div class="background_page_cart">
+        <div class="cart_box container js-clearCart js-exitFromSystem">
+            {% if message != null %}
+                <h2 class="message_for_user">{{ message }}</h2>
+            {% else %}
+                <section class="cart_product_box">
+                    {% set totalPrice = 0 %}
+                    {% for good in content %}
+                        {% set totalPrice = good.price * good.quantity + totalPrice%}
+                        <figure class="cart_product">
+                            <i
+                                    class="fa fa-times"
+                                    aria-hidden="true"
+                                    data-id="{{good.id_good}}"
+                                    data-color="{{good.color}}"
+                                    data-size="{{good.size}}"
+                                    style="font-size: 1.5em"
+                            ></i>
+                            <a href="?c=page&act=showGood&id={{good.id_good}}" class="cart_link_to_product"
+                            ><img
+                                        class="cart_product_photo"
+                                        src="images/photoGoods/small/{{good.path}}"
+                                        alt="photo"
+                                />
+                            </a>
+                            <figcaption class="cart_product_text_box">
+                                <h2 class="product_text_heading">{{good.name_good | upper}}</h2>
+                                <p class="product_text_category">{{good.category_title}}</p>
+                                <p class="cart_product_text">
+                                    Цена: <span class="pink_text">&#8381;{{ good.price }}</span>
+                                </p>
+                                <p class="cart_product_text">Цвет: {{ good.color }}</p>
+                                <p class="cart_product_text">Размер: {{ good.size }}</p>
+                                <p class="cart_product_text">
+                                    Количество:
+                                    <input
+                                            type="number"
+                                            step="1"
+                                            min="1"
+                                            max="100"
+                                            name="{{good.id_good}}-{{ good.color }}-{{ good.size }}"
+                                            value="{{ good.quantity }}"
+                                            title="Введите количество"
+                                            class="cart_product_quantity js-input-change-count-good-cart"
+                                            form="cart_form"
+                                    />
+                                </p>
+                            </figcaption>
+                        </figure>
+                    {% endfor %}
+
+
+                    <div class="cart_product_link">
+                        {# для незарег. польз-ля очистка корзины осуществляется через JS путем удаления куки. Для зарег - го через AJAX #}
+                        <a href="#" class="product_link js-clearCartButton">Очистить корзину покупок</a>
+                        <a href="?c=page&act=getCatalog" class="product_link">Продолжить покупки</a>
+                    </div>
+                </section>
+
+                <form action="" method="post" class="shipping_adress" id="cart_form">
+                    <fieldset class="fieldset">
+                        {% if cookie.login == null %}
+                            <legend class="legend">Информация о вас</legend>
+                            <input
+                                    required
+                                    autofocus
+                                    maxlength="50"
+                                    type="text"
+                                    name="name"
+                                    class="input_field js-field-validation"
+                                    placeholder="Ваше имя"
+                            />
+                            <input
+                                    required
+                                    maxlength="50"
+                                    type="text"
+                                    name="surname"
+                                    class="input_field input_black_text js-field-validation"
+                                    placeholder="Фамилия"
+                            />
+                            <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    class="input_field input_black_text js-field-validation"
+                                    placeholder="Электронная почта"
+                            />
+                        {% endif %}
+                        <textarea
+                                name="AddInfo"
+                                id="cart_textarea"
+                                maxlength="400"
+                                form="cart_form"
+                                placeholder="Дополнительная информация(ваши пожелания)"
+                        ></textarea>
+                    </fieldset>
+
+                    <div class="checkout_box">
+                        <p class="sub_total">
+                            Скидка <span class="span_sub_total">0</span>
+                        </p>
+                        <h3 class="grand_total">
+                            Итоговая цена <span class="span_grand_total js-cart-total-price">&#8381;{{ totalPrice }}</span>
+                        </h3>
+                        <hr class="checkout_line" />
+                        <button type="submit" class="checkout_link" name="cartButtonOrder" form="cart_form">
+                            Оформить заказ
+                        </button>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+    {% include 'common/footer.twig' %}
+
+{% endapply %}

@@ -1,0 +1,94 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+
+    <div class="brand">
+        <div class="brand_box container">
+            <img class="brand_men" src="images/different_image/man_brand.png" alt="photo" />
+            <div class="brand_box_head">
+                <span class="vertical_line"></span>
+                <div class="brand_box_text">
+                    <h1 class="brand_box_h1">The brand</h1>
+                    <h2 class="brand_box_h2">
+                        одежда из <span class="pink_text">Франции</span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="background_page_index">
+        <section class="chapters container">
+            <div class="chapters_box">
+                <article class="chapters_card">
+                    <a href="?c=page&act=showCategoryProducts&category=Женщинам&majorCategory=2" class="chapters_link"
+                    ><img
+                                class="chapters_img"
+                                src="images/different_image/for_women.png"
+                                alt="photo"
+                        />
+                        <div class="chapters_text_box">
+                            <p class="chapters_text">Скидки до 20%</p>
+                            <h3 class="chapters_heading">Для женщин</h3>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="chapters_card">
+                    <a href="?c=page&act=showCategoryProducts&category=Мужчинам&majorCategory=1" class="chapters_link"
+                    ><img class="chapters_img" src="images/different_image/for_men.png" alt="photo" />
+                        <div class="chapters_text_box">
+                            <p class="chapters_text">горячие предложения</p>
+                            <h3 class="chapters_heading">Для мужчин</h3>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="chapters_card">
+                    <a href="?c=page&act=showCategoryProducts&category=Детям&majorCategory=3" class="chapters_link"
+                    ><img class="chapters_img" src="images/different_image/for_kids.png" alt="photo" />
+                        <div class="chapters_text_box">
+                            <p class="chapters_text">новые поступления</p>
+                            <h3 class="chapters_heading">Для детей</h3>
+                        </div>
+                    </a>
+                </article>
+            </div>
+
+            <article class="chapters_card chapters_accesories">
+                <a href="?c=page&act=showCategoryProducts&category=Аксессуары&majorCategory=4" class="chapters_link accesories_link"
+                ><img
+                            class="chapters_img accesories_img"
+                            src="images/different_image/accesories.png"
+                            alt="photo"
+                    />
+                    <div class="chapters_text_box accesories_text_box">
+                        <p class="chapters_text">люксовые и модные</p>
+                        <h3 class="chapters_heading">Аксессуары</h3>
+                    </div>
+                </a>
+            </article>
+        </section>
+
+        <section class="catalog_box container">
+            <h2 class="catalog_head">Популярно сейчас</h2>
+            <p class="catalog_text">
+                Мы сделали подборку, основанную на наиболee часто просматриваемых товарах за последнее время
+            </p>
+            <div class="card_box">
+                {% for good in content %}
+                {% include 'common/productCard.twig' %}
+                {% endfor %}
+
+                {% include 'modalWindows/modal_addGoodToCart.twig' %}
+
+            </div>
+            <a href="?c=page&act=getCatalog" class="catalog_button">Посмотреть все товары</a>
+        </section>
+    </div>
+
+    {% include 'common/advantages.twig' %}
+    {% include 'common/footer.twig' %}
+
+{% endapply %}

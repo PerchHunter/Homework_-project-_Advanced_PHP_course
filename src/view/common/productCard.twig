@@ -1,0 +1,21 @@
+<figure class="card" data-id="{{ good.id_good }}" data-category="{{ good.id_category }}" data-sizes="{{ good.sizes }}" data-colors="{{ good.colors }}" data-price="{{ good.price }}">
+    <a href="?c=page&act=showGood&id={{good.id_good}}" class="card_link">
+        <img
+                class="card_img"
+                src="images/photoGoods/small/{{good.path}}"
+                alt="photo"
+        />
+        <div class="card_info">
+            <h3 class="card_head">{{good.name_good | upper}}</h3>
+            <p class="card_text">{{good.description}}</p>
+            <p class="card_price js-card_price-{{good.id_good}}">&#8381;{{good.price}}</p>
+        </div>
+    </a>
+    <div class="add_box">
+        <a href="#" class="add js_addToCart" data-modal="{{good.id_good}}">
+            <img src="images/different_image/add.svg" alt="add" class="add_img" />
+            <p class="add_text">Добавить в корзину</p>
+        </a>
+    </div>
+</figure>
+

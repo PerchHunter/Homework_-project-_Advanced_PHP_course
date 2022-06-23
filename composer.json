@@ -1,0 +1,28 @@
+{
+  "name": "sergey_feoktistov/lesson6_8",
+  "description": "HomeWork for lesson 6-8 advanced PHP. Open-server PHP v7.4.5",
+  "license": "Serg_Feo",
+  "autoload": {
+    "psr-4": {
+      "SergeyFeoktistov\\Lesson8\\": "src/"
+    }
+  },
+  "autoload-dev": {
+      "tests\\": "src/tests/"
+  },
+  "authors": [
+    {
+      "name": "Sergey Feoktistov",
+      "email": "bbldyk@mail.ru"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "twig/twig": "v3.1.0",
+    "ext-pdo": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "9"
+  }
+}

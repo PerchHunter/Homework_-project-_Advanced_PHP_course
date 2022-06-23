@@ -1,0 +1,13 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+
+    <div class="backgroundPage_changeCatalog">
+        {% include 'admin/tableAddGoodInCatalog.twig' %}
+
+        {% include 'admin/tableAddColorSize.twig' %}
+
+        {% include 'admin/tableChangeCatalog.twig' %}
+    </div>
+    {% include 'common/footer.twig' %}
+{% endapply %}

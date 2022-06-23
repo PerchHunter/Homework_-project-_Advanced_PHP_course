@@ -1,0 +1,51 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+
+    <div class="breadcrumb_background">
+        <div class="breadcrumb_nav breadcrumb_padding container">
+            <h2 class="breadcrumb_heading">{{ breadcrumb.title }}</h2>
+        </div>
+    </div>
+
+    <div class="background_page_registration">
+        <section class="registration_box container">
+            <form action="" method="post" id="auth_form" class="registration_form">
+                <fieldset class="fieldset_registration">
+                    <legend class="legend">Войдите</legend>
+                    <input type="text" class="input_field" name="login" placeholder="Логин">
+                    <input type="password" class="input_field" name="password" placeholder="Пароль">
+                </fieldset>
+
+                <div class="form_radiobutton">
+                    <input type="radio" id="remember" name="remember" value="remember" class="radio_buttons">
+                    <label for="remember" class="label_buttons">Запомнить меня</label>
+                </div>
+
+                {% if message %}
+                    <p class="warning_message">{{ message }}</p>
+                {% endif %}
+                <button form="auth_form" type="submit" class="form_button">
+                    Войти <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+
+
+            <article class="loyalty">
+                <h2 class="loyalty_heading">У зарегистрированных пользователей есть преимущества</h2>
+                <p class="loyalty_text">Участвуйте в программе лояльности, где вы можете зарабатывать баллы и получать скидки. Воспользуйтесь ими как только зарегистрируетесь:</p>
+                <ul class="loyalty_list">
+                    <li class="loyalty_punkt">15% скидка на первый заказ</li>
+                    <li class="loyalty_punkt">Бесплатная доставка, возврат и обмен по всем заказам</li>
+                    <li class="loyalty_punkt">1000 рублей скидка в ваш День рождения</li>
+                    <li class="loyalty_punkt">Получите доступ к товарам первым</li>
+                    <li class="loyalty_punkt">Индивидуальные предложения и вознаграждения</li>
+                </ul>
+            </article>
+        </section>
+    </div>
+
+
+    {% include 'common/footer.twig' %}
+
+{% endapply %}

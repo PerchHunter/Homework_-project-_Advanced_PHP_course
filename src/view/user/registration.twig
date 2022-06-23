@@ -1,0 +1,61 @@
+{% apply spaceless %}
+
+    {% include 'common/header.twig' %}
+
+    <div class="breadcrumb_background">
+        <div class="breadcrumb_nav breadcrumb_padding container">
+            <h2 class="breadcrumb_heading">{{ breadcrumb.title }}</h2>
+        </div>
+    </div>
+
+    <div class="background_page_registration">
+        <section class="registration_box container">
+            <form action="" method="post" id="registration_form" class="registration_form">
+                <fieldset class="fieldset_registration">
+                    <legend class="legend">Информация о вас</legend>
+                    <input autofocus required type="text" class="input_field js-field-validation" name="name" placeholder="Ваше имя">
+                    <input required type="text" class="input_field js-field-validation" name="surname" placeholder="Фамилия">
+                </fieldset>
+
+                <div class="form_radiobutton">
+                    <input checked type="radio" id="male" name="gender" value="male" class="radio_buttons">
+                    <label for="male" class="label_buttons">Мужчина</label>
+                    <input type="radio" id="female" name="gender" value="female" class="radio_buttons">
+                    <label for="female" class="label_buttons">Женщина</label>
+                </div>
+
+                <fieldset class="fieldset_registration">
+                    <legend class="legend">Детали аккаунта</legend>
+                    <input type="text" class="input_field js-field-validation" name="login" placeholder="Логин">
+                    <input type="email" class="input_field js-field-validation" name="email" placeholder="Электронная почта">
+                    <input type="password" class="input_field js-field-validation" name="password" placeholder="Пароль">
+                    <p class="form_text">Пароль должен состоять из минимум 8 символов. Минимум 1 большая буква, 1 цифра, спецсимволы (не обязательно).</p>
+                    {% if message %}
+                        <p class="warning_message">{{ message }}</p>
+                    {% endif %}
+                </fieldset>
+
+                <button form="registration_form" type="submit" class="form_button">
+                    Зарегистрироваться <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+
+
+            <article class="loyalty">
+                <h2 class="loyalty_heading">У зарегистрированных пользователей есть преимущества</h2>
+                <p class="loyalty_text">Участвуйте в программе лояльности, где вы можете зарабатывать баллы и получать скидки. Воспользуйтесь ими как только зарегистрируетесь:</p>
+                <ul class="loyalty_list">
+                    <li class="loyalty_punkt">15% скидка на первый заказ</li>
+                    <li class="loyalty_punkt">Бесплатная доставка, возврат и обмен по всем заказам</li>
+                    <li class="loyalty_punkt">1000 рублей скидка в ваш День рождения</li>
+                    <li class="loyalty_punkt">Получите доступ к товарам первым</li>
+                    <li class="loyalty_punkt">Индивидуальные предложения и вознаграждения</li>
+                </ul>
+            </article>
+        </section>
+    </div>
+
+
+    {% include 'common/footer.twig' %}
+
+{% endapply %}

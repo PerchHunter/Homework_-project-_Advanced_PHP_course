@@ -1,0 +1,38 @@
+{#Самодельная карусель. Мой велосипед на костылях))#}
+
+<div class="background_carousel">
+    <div class="carousel">
+        <input type="radio" id="car0" name="car" checked="checked" class="carousel_input" />
+        <div></div>
+        <input type="radio" id="car1" name="car" class="carousel_input" />
+        <div>
+            <label class="carousel__arrow" for="car0"></label>
+            <div class="carousel__item" style="background-image: url(images/photoGoods/big/{{content.photos.0}})">
+            </div>
+        </div>
+        <input type="radio" id="car2" name="car" class="carousel_input" />
+        <div>
+            {%if content.good.countPhotos >= 2 %}
+                <label class="carousel__arrow" for="car1"></label>
+            {%endif%}
+            <div class="carousel__item" style="background-image: url(images/photoGoods/big/{{content.photos.1}})">
+            </div>
+        </div>
+        {%if content.good.countPhotos >= 3 %}
+            <input type="radio" id="car3" name="car" class="carousel_input" />
+        {%endif%}
+        <div>
+            <label class="carousel__arrow" for="car2"></label>
+            <div class="carousel__item" style="background-image: url(images/photoGoods/big/{{content.photos.2}})">
+            </div>
+        </div>
+        {%if content.good.countPhotos >= 4 %}
+            <input type="radio" id="car4" name="car" class="carousel_input" />
+        {%endif%}
+        <div>
+            <label class="carousel__arrow" for="car3"></label>
+            <div class="carousel__item" style="background-image: url(images/photoGoods/big/{{content.photos.3}})">
+            </div>
+        </div>
+    </div>
+</div>
