@@ -1,7 +1,7 @@
 {
   "name": "sergey_feoktistov/lesson6_8",
   "description": "HomeWork for lesson 6-8 advanced PHP. Open-server PHP v7.4.5",
-  "license": "Serg_Feo",
+  "license": "",
   "autoload": {
     "psr-4": {
       "SergeyFeoktistov\\Lesson8\\": "src/"

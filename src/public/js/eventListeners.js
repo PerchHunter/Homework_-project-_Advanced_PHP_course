@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // кнопка "Подпписаться" в подвале страницы
+    // кнопка "Подписаться" в подвале страницы
     if (modalSubscribeButton) {
         modalSubscribeButton.addEventListener('click', e => {
             let modalId = e.currentTarget.dataset.modal;

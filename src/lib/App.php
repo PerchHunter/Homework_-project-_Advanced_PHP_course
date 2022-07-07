@@ -15,7 +15,7 @@ class App {
     protected static function web(): void
     {
 	    // если юзер первый раз зашёл на сайт и у него ещё не было роли, то присваиваем 0 - неавторизованный пользователь
-	    if (is_null($_SESSION['role'])) $_SESSION['role'] = 0;
+	    if (is_null($_SESSION['role'])) $_SESSION['role'] = '0';
 
 	    $action = 'action_';
         $action .= $_GET['act'] ?? 'index';

@@ -33,7 +33,7 @@ function checkCartCookie(count = 0) {
  * @param e
  */
 function addToCart(args, callPoint, e) {
-  let id, category, price, color, size, quantity;
+  let [id, category, price, color, size, quantity] = args;
 
   if (callPoint === 'modalWindow') {
     e.preventDefault();
@@ -41,27 +41,17 @@ function addToCart(args, callPoint, e) {
     const modalTitle = modalWindow.querySelector('.modal__title');
     color = modalWindow.querySelector('select[name="color"]').value;
     size = modalWindow.querySelector('select[name="size"]').value;
-    quantity = +modalWindow.querySelector('select[name="quantity"]').value;
-    id = +args[0];
-    category = +args[1];
-    price = +args[2];
+    quantity = modalWindow.querySelector('select[name="quantity"]').value;
 
-    if (!color || !size || !quantity) {
+   console.log(e.target);
+    if (!color || !size || !+quantity) {
       modalTitle.innerText = 'Пожалуйста, выберите все поля';
-      // ПОЧЕМУ ЗАНОВО ОБРАБОТЧИК НЕ НАЗНАЧАЕТСЯ ?
-      // e.currentTarget.addEventListener('click', addToCart.bind( e.currentTarget, [id, category, price], {once: true}));
+      e.target.addEventListener('click', addToCart.bind( e.target, args, 'modalWindow'),{once: true});
       return;
     }
   }
   else if (callPoint === 'productPage') {
-    id = +args[0];
-    category = +args[1];
-    price = +args[2];
-    color = args[3];
-    size = args[4];
-    quantity = +args[5];
-
-    if (!color || !size || !quantity) return 'Пожалуйста, выберите все поля';
+    if (!color || !size || !+quantity) return 'Пожалуйста, выберите все поля';
   }
 
   let options = {

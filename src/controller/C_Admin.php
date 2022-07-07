@@ -10,7 +10,7 @@
 
 
 		public function action_getOrders() {
-			if ($_SESSION['role'] == 2) {
+			if ($_SESSION['role'] == '2') {
 				$this->title .= ' | Заказы';
 
 				if ($this->IsPost()) $this->message = $this->admin->setChangeOfOrders();
@@ -21,7 +21,7 @@
 		}
 
 		public function action_changeCatalog() {
-			if ($_SESSION['role'] == 2) {
+			if ($_SESSION['role'] == '2') {
 				$this->title .= ' | Изменить каталог';
 
 				if ($this->IsPost()) $this->message = $this->admin->addNewGoodInCatalog();

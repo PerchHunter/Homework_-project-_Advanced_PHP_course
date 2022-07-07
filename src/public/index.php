@@ -1,1 +1,1 @@
-<?php	session_start();	require_once '../configurations/autoload.php';	try{		App::init();	}	catch (Exception $e){		die($e->getMessage());	}
+<?php	session_start();//	ini_set('error_reporting', E_ALL);//	ini_set('display_errors', 1);	require_once '../configurations/autoload.php';	try{		App::init();	}	catch (Exception $e){		die($e->getMessage());	}

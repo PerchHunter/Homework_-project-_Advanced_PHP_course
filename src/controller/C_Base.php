@@ -41,7 +41,7 @@
 			$twig->addGlobal('cookie', $_COOKIE); //установил глобальные переменные. Теперь куки, гет-параметры и пар-ры сессии доступны в любом месте шаблона
 			$twig->addGlobal('get', $_GET);
 			$twig->addGlobal('session', $_SESSION);
-//			print_r($_SESSION);
+			// print_r($_SESSION);
 //			print_r($this->content); // посмотреть что у нас выдаёт сервер
 			echo  $twig->render($this->template, $vars);
 		}

@@ -97,7 +97,7 @@
 </header>
 
 {#панель администратора#}
-{% if session.role == 2 %}
+{% if session.role == '2' %}
     {% include 'admin/adminPanel.twig' %}
 {% endif %}
 

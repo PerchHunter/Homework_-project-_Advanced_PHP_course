@@ -61,7 +61,7 @@
 						setcookie('login',$login,time()+3600*24*7,'/');
 						setcookie('cartForAuth',$alreadyInCart,time()+3600*24*7,'/');
 
-						$_SESSION['role'] = 1;
+						$_SESSION['role'] = '1';
 					}
 					else {
 						setcookie('ID',$userID,0,'/');
@@ -170,7 +170,7 @@
 		 * Выход из системы
 		 */
 		public function exitFromSystem(): void {
-			unset($_SESSION['role']);
+			$_SESSION['role'] = '0';
 
 			setcookie('ID',' ',time()-1,'/');
 			setcookie('login',' ',time()-1,'/');
