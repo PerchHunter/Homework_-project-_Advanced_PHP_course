@@ -31,7 +31,10 @@
 
                     {% include 'modalWindows/modal_addGoodToCart.twig' %}
 
-                    {% include 'catalog/pagination.twig' %}
+                    {% if pagination > 1 %}
+                        {% include 'catalog/pagination.twig' %}
+                    {% endif %}
+
                 {% endif %}
             </section>
         </div>

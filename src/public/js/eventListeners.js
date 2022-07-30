@@ -80,8 +80,15 @@ document.addEventListener("DOMContentLoaded", () => {
             let quantity = form.querySelector('select[name="quantity"]').value;
 
             // показываем сообщение под кнопкой, добавлен товар или нет
-            if (AUTH_USER) e.currentTarget.nextElementSibling.innerText = addToCartForAuth([id, color, size, quantity], 'productPage', null);
-            else e.currentTarget.nextElementSibling.innerText = addToCart([id, category, price, color, size, quantity], 'productPage', null);
+            let messageNode = document.querySelector('.warning_message');
+
+            if (AUTH_USER) {
+                messageNode.innerText = addToCartForAuth([id, color, size, quantity], 'productPage', null);
+            }
+            else {
+                messageNode.innerText = addToCart([id, category, price, color, size, quantity], 'productPage', null);
+                setTimeout(() => messageNode.innerText = '', 2000);
+            }
         });
     }
 

@@ -1,23 +1,22 @@
 //  добавление товара в корзину для зарегистрированного пользователя
 function addToCartForAuth(args, callPoint, e) {
-    let string;
+    let [id, color, size, quantity, string] = args;
 
     if (callPoint === 'modalWindow') {
         e.preventDefault();
         const modalWindow = e.target.closest('#js-addToCartModalWindow');
         const modalTitle = modalWindow.querySelector('.modal__title');
-        const idGood = args[0];
         let color = modalWindow.querySelector('select[name="color"]').value;
         let size = modalWindow.querySelector('select[name="size"]').value;
         let quantity = modalWindow.querySelector('select[name="quantity"]').value;
 
-        if (!color || !size || !quantity) return modalTitle.innerText = 'Пожалуйста, выберите все поля';
+        if (!color || !size || !+quantity) return modalTitle.innerText = 'Пожалуйста, выберите все поля';
 
-        string = `c=Cart&action=addToCartForAuth&idGood=${idGood}&color=${color}&size=${size}&quantity=${quantity}`;
+        string = `c=Cart&action=addToCartForAuth&idGood=${id}&color=${color}&size=${size}&quantity=${quantity}`;
     }
     else if (callPoint === 'productPage') {
-        if (!args[1] || !args[2] || !args[3]) return 'Пожалуйста, выберите все поля';
-        string = `c=Cart&action=addToCartForAuth&idGood=${args[0]}&color=${args[1]}&size=${args[2]}&quantity=${args[3]}`;
+        if (!color || !size || !+quantity) return 'Пожалуйста, выберите все поля';
+        string = `c=Cart&action=addToCartForAuth&idGood=${id}&color=${color}&size=${size}&quantity=${quantity}`;
     }
 
     const headers = {
@@ -37,7 +36,9 @@ function addToCartForAuth(args, callPoint, e) {
                 }
                 else if (callPoint === 'productPage') {
                     document.querySelector('.count_goods').innerText = getCookie('cartForAuth');
-                    document.querySelector('.warning_message').innerText = 'Товар добавлен в корзину!';
+                    let messageNode = document.querySelector('.warning_message');
+                    messageNode.innerText = 'Товар добавлен в корзину!';
+                    setTimeout(() => messageNode.innerText = '', 2000);
                 }
             }
         })
@@ -242,31 +243,6 @@ function saveChangeOfGood(e) {
         })
         .then(text => e.target.innerText = text)
 }
-
-
-// хотел сделать добавление  нового товара в каталог в админке поинтереснее, с помощью события formdata, но не получилось
-// const formAddGoodInCatalog = document.getElementById('addGoodInCatalog');
-// if (formAddGoodInCatalog) {
-//     formAddGoodInCatalog.addEventListener('formdata', e => {
-//         let data = e.formData;
-        // console.log(data);
-        // for (let value of data.values()) {
-        //     console.log(value);
-        // }
-//
-//         const headers = {
-//             "content-type": "application/x-www-form-urlencoded"
-//         }
-//
-//         fetch('../lib/server.php', {method: "POST", body: data, headers: headers})
-//             .then(response => {
-//                 return response.status !== 200 ? Promise.reject() : response.text();
-//             })
-//             .then(text => e.target.querySelector('button[form="addGoodInCatalog"]').innerText = text)
-//     });
-// }
-
-
 
 // При добавлении нового товара в каталог, когда админ выбирает главную категорию
 // в соседний select подтягиваются подкатегории для этой категории.

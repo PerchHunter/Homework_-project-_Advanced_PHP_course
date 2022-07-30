@@ -24,11 +24,12 @@ class C_Page extends C_Base
 	 */
 	public function action_getCatalog(): void
 	{
+		$data = $this->page->getCatalog();
+
 		$this->title .= ' | Каталог';
 		$this->breadcrumb = ['title' => 'Каталог'];
-
-		$this->content = $this->page->getCatalog();
-
+		$this->pagination = $data['pagination'];
+		$this->content = $data['products'];
 		$this->template = 'catalog/catalog.twig';
 	}
 
@@ -37,9 +38,12 @@ class C_Page extends C_Base
 	 */
 	public function action_showCategoryProducts(): void
 	{
+		$data = $this->page->showCategoryProducts();
+
 		$this->title .= ' | Каталог';
 		$this->breadcrumb = ['title' => 'Каталог'];
-		$this->content = $this->page->showCategoryProducts();
+		$this->pagination = $data['pagination'];
+		$this->content = $data['products'];
 		$this->message = count($this->content) ? '' : 'Товары этой категории скоро будут добавлены :)';
 		$this->template = 'catalog/catalog.twig';
 	}

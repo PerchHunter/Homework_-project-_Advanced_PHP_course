@@ -97,9 +97,3 @@ class DB {
 	    }
     }
 }
-
-/*
-db::getInstance()->Select(
-                'SELECT * FROM goods WHERE category_id = :category AND good_id=:good AND good_is_active=:status',
-                ['status' => Status::Active, 'category' => $categoryId, 'good'=>$goodId]);
-*/

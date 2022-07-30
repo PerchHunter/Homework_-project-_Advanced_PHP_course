@@ -21,34 +21,20 @@ body {
 .header {
   background-color: #222222;
   height: 75px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .header_box {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header_left {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .logo {
@@ -72,7 +58,6 @@ body {
   color: #222224;
   text-align: center;
   background: #f1e4e6;
-  -webkit-transition: width 0.55s ease-in-out;
   transition: width 0.55s ease-in-out;
 }
 
@@ -88,12 +73,8 @@ body {
 
 /*ПРАВАЯ СТОРОНА ХЕДЕРА*/
 .header_right {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  align-items: baseline;
 }
 
 .menu {
@@ -123,17 +104,12 @@ body {
 
 .menu_box {
   display: none;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   background: #ffffff;
-  -webkit-box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
-          box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+  box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
   border-radius: 5px;
   width: 232px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   position: absolute;
   padding-bottom: 30px;
 }
@@ -164,8 +140,7 @@ body {
   border-top: 1px solid rgba(0, 0, 0, 0.21);
   top: -6px;
   left: 90px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .menu_box_auth::before {
@@ -179,8 +154,7 @@ body {
   border-top: 1px solid rgba(0, 0, 0, 0.21);
   top: -6px;
   left: 145px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .menu_box_heading {
@@ -220,7 +194,6 @@ body {
 .item_link:hover {
   color: #ffffff;
   background: #f16d7f;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -237,7 +210,6 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 20;
-  -webkit-transition: 0.3s opacity;
   transition: 0.3s opacity;
 }
 
@@ -253,20 +225,16 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  z-index: 30;
-  /* Должен быть выше чем у подложки*/
+  transform: translate(-50%, -50%);
+  z-index: 30; /* Должен быть выше чем у подложки*/
   /*  Побочные стили   */
   font: 700 20px/20px "Raleway";
   color: #f16d7f;
   text-align: center;
-  -webkit-box-shadow: 0 3px 10px -0.5px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 3px 10px -0.5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px -0.5px rgba(0, 0, 0, 0.2);
   padding: 30px;
   border-radius: 3px;
   background-color: #fff;
-  -webkit-transition: 0.3s opacity;
   transition: 0.3s opacity;
 }
 
@@ -304,7 +272,6 @@ body {
   background-color: #f16d7f;
   display: block;
   margin: 20px auto 0;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -321,15 +288,9 @@ body {
 }
 
 .adminPanel__wrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .adminPanel__heading {
@@ -343,12 +304,8 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   padding: 20px 0;
 }
 
@@ -363,7 +320,6 @@ body {
   border: 1px solid transparent;
   padding: 10px;
   cursor: pointer;
-  -webkit-transition: background-color 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -377,8 +333,6 @@ body {
 }
 
 .brand_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -387,16 +341,11 @@ body {
 }
 
 .brand_box_head {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   height: 92px;
   width: 50%;
-  -ms-flex-item-align: center;
-      align-self: center;
+  align-self: center;
 }
 
 .vertical_line {
@@ -408,16 +357,9 @@ body {
 
 .brand_box_text {
   width: 377px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .brand_box_h1 {
@@ -440,12 +382,8 @@ body {
 }
 
 .chapters_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
 
 .chapters_card {
@@ -458,8 +396,7 @@ body {
 }
 
 .chapters_img {
-  -webkit-filter: brightness(50%);
-          filter: brightness(50%);
+  filter: brightness(50%);
   width: 100%;
   display: block;
 }
@@ -492,27 +429,16 @@ body {
 }
 
 .chapters_card:hover .chapters_img {
-  -webkit-filter: none;
-          filter: none;
-  -webkit-transition: -webkit-filter 0.55s ease;
-  transition: -webkit-filter 0.55s ease;
+  filter: none;
   transition: filter 0.55s ease;
-  transition: filter 0.55s ease, -webkit-filter 0.55s ease;
 }
 
 /*БЛОК С КАРТОЧКАМИ ТОВАРОВ*/
 .catalog_box {
   margin-top: 96px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .catalog_head {
@@ -530,14 +456,9 @@ body {
 
 .card_box {
   margin-top: 48px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .card {
@@ -558,18 +479,14 @@ body {
 }
 
 .card:hover {
-  -webkit-box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
-          box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
 }
 
 .card:hover .card_img {
-  -webkit-filter: brightness(50%);
-          filter: brightness(50%);
+  filter: brightness(50%);
 }
 
 .card:hover .add_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -586,14 +503,10 @@ body {
   font: 300 14px/17px "Raleway";
   color: #5d5d5d;
   margin: 13px 0 18px 0;
-  -webkit-line-clamp: 3;
-  /* Число отображаемых строк */
-  display: -webkit-box;
-  /* Включаем флексбоксы */
-  -webkit-box-orient: vertical;
-  /* Вертикальная ориентация */
-  overflow: hidden;
-  /* Обрезаем всё за пределами блока */
+  -webkit-line-clamp: 3; /* Число отображаемых строк */
+  display: -webkit-box; /* Включаем флексбоксы */
+  -webkit-box-orient: vertical; /* Вертикальная ориентация */
+  overflow: hidden; /* Обрезаем всё за пределами блока */
 }
 
 .card_price {
@@ -605,26 +518,17 @@ body {
   position: absolute;
   top: 188.5px;
   display: none;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   width: 100%;
 }
 
 .add {
   text-decoration: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: 10px;
   border: 1px solid #ffffff;
-  -webkit-transition: -webkit-box-shadow 0.2s ease;
-  transition: -webkit-box-shadow 0.2s ease;
   transition: box-shadow 0.2s ease;
-  transition: box-shadow 0.2s ease, -webkit-box-shadow 0.2s ease;
 }
 
 .add_text {
@@ -634,8 +538,7 @@ body {
 }
 
 .add:hover {
-  -webkit-box-shadow: 0 0 10px #ffffff;
-          box-shadow: 0 0 10px #ffffff;
+  box-shadow: 0 0 10px #ffffff;
 }
 
 .catalog_button {
@@ -646,7 +549,6 @@ body {
   border: 1px solid #f16d7f;
   padding: 14px 38.5px;
   margin-top: 18.5px;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -662,12 +564,8 @@ body {
 }
 
 .advantages_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   padding: 103px 0;
 }
 
@@ -703,27 +601,16 @@ body {
 }
 
 .feedback_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   padding-top: 97px;
   padding-bottom: 156px;
 }
 
 .comment {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   width: 360px;
 }
 
@@ -735,16 +622,9 @@ body {
 }
 
 .subscribe {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   width: 557px;
   margin-top: 63px;
 }
@@ -763,8 +643,6 @@ body {
 }
 
 .form_email {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 22px;
 }
@@ -780,8 +658,7 @@ body {
   padding-left: 22px;
   color: #222224;
   opacity: 0.67;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .button_email {
@@ -792,7 +669,6 @@ body {
   border-radius: 0 20px 20px 0;
   border: 1px solid #f16d7f;
   color: #ffffff;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -807,15 +683,9 @@ body {
 }
 
 .copyright {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   height: 79px;
   text-align: center;
 }
@@ -826,12 +696,8 @@ body {
 }
 
 .footer_links {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   width: 148px;
 }
 
@@ -844,17 +710,10 @@ body {
   text-align: center;
   line-height: 32px;
   border: 1px solid transparent;
-  -webkit-transition: all 0.55s ease;
   transition: all 0.55s ease;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .links:hover {
@@ -868,15 +727,9 @@ body {
 }
 
 .breadcrumb_nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   min-height: 148px;
 }
 
@@ -890,12 +743,8 @@ body {
 .breadcrumb {
   list-style-type: none;
   text-transform: uppercase;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   margin-left: 50px;
   white-space: nowrap;
   overflow: hidden;
@@ -934,8 +783,7 @@ body {
 .background_carousel {
   background: #f7f7f7;
   padding: 30px 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .carousel_input {
@@ -964,10 +812,7 @@ body {
   background-position-y: center;
   background-repeat: no-repeat;
   background-size: contain;
-  -webkit-transition: left 0.5s, -webkit-transform 0.5s;
-  transition: left 0.5s, -webkit-transform 0.5s;
   transition: left 0.5s, transform 0.5s;
-  transition: left 0.5s, transform 0.5s, -webkit-transform 0.5s;
   will-change: transform;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
@@ -978,8 +823,7 @@ body {
   position: absolute;
   top: 47%;
   z-index: 3;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   color: #000000;
   background-color: rgba(42, 42, 42, 0.15);
   cursor: pointer;
@@ -1004,20 +848,17 @@ input:checked + div + input + div + input + div * {
 
 input:checked + div .carousel__item {
   left: -100%;
-  -webkit-transform: scale(0.4);
-          transform: scale(0.4);
+  transform: scale(0.4);
 }
 
 input:checked + div + input + div .carousel__item {
   left: 0;
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 
 input:checked + div + input + div + input + div .carousel__item {
   left: 100%;
-  -webkit-transform: scale(0.4);
-          transform: scale(0.4);
+  transform: scale(0.4);
 }
 
 input:checked + div .carousel__arrow {
@@ -1045,35 +886,19 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 .product_info {
   border: 1px solid #eaeaea;
   background: #ffffff;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
   padding: 65px 0;
-  -webkit-transform: translateY(-64px);
-          transform: translateY(-64px);
+  transform: translateY(-64px);
 }
 
 .product_box_top {
   text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .chapter_name {
@@ -1119,11 +944,8 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 }
 
 .product_box_bottom {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-item-align: center;
-      align-self: center;
+  align-self: center;
   margin-top: 65px;
   margin-bottom: 49px;
 }
@@ -1147,7 +969,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   font: 400 14px/17px "Raleway";
   color: #f16d7f;
   margin-right: -70px;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   text-transform: uppercase;
 }
@@ -1188,22 +1009,15 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 /*КОНЕЦ БЛОКА ВЫБОРА ЦВЕТА И РАЗМЕРА СТРАНИЦЫ ПРОДУКТ*/
 .product_add {
   height: 47px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   border: 1px solid #f16d7f;
   background-color: #ffffff;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  -ms-flex-item-align: center;
-      align-self: center;
+  align-self: center;
 }
 
 .fa-shopping-cart {
@@ -1215,7 +1029,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   font: 400 16px/19px "Raleway";
   color: #f16d7f;
   padding-right: 56.5px;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -1235,14 +1048,9 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 
 .card_box_product {
   margin-top: 65px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 /*СТРАНИЦА КАТАЛОГ*/
@@ -1300,11 +1108,9 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   top: -13px;
   left: 0;
   padding: 46px 17px 17px 17px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background: #ffffff;
-  -webkit-box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
-          box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+  box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
   width: 360px;
   display: none;
 }
@@ -1322,13 +1128,9 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   color: #6f6e6e;
   font: 400 14px/17px "Raleway";
   text-transform: uppercase;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: 37px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   border-bottom: 1px solid #ebebeb;
   border-left: 5px solid #f16d7f;
   padding-left: 11px;
@@ -1340,12 +1142,10 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   font: 400 14px/17px "Raleway";
   color: #6f6e6e;
   border: 1px solid transparent;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   display: none;
   padding: 6px 0 6px 17px;
   width: 100%;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -1364,22 +1164,14 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 }
 
 .filter_block {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 /*ВЫПАДАЮЩИЕ ОКНА ВЫБОРА РАЗМЕРА, ЦВЕТА И Т.Д. НА СТРАНИЦЕ "КАТАЛОГ"*/
 .choise_block {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   margin: 65px 0 49px 0;
 }
 
@@ -1422,11 +1214,9 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   top: 20px;
   padding: 5px 10px;
   width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background: #f7f7f7;
-  -webkit-box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
-          box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+  box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
 }
 
 .item {
@@ -1434,15 +1224,13 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   font: 400 14px/16px Raleway;
   color: #6f6e6e;
   padding: 5px 10px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
 }
 
 .item:hover {
   background: #f16d7f;
   color: #ffffff;
-  -webkit-transition: 0.55s ease;
   transition: 0.55s ease;
   border-radius: 20px;
   cursor: pointer;
@@ -1450,7 +1238,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 
 .variant:checked + .item {
   background: #f16d7f;
-  color: white;
+  color: hsl(0deg, 0%, 100%);
   border-radius: 20px;
 }
 
@@ -1463,9 +1251,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 
 .variant_check + .item_check {
   display: block;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -1481,11 +1267,8 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   display: inline-block;
   width: 12px;
   height: 12px;
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
-  -webkit-box-flex: 0;
-      -ms-flex-positive: 0;
-          flex-grow: 0;
+  flex-shrink: 0;
+  flex-grow: 0;
   border: 1px solid #ebebeb;
   margin-right: 10px;
   background-repeat: no-repeat;
@@ -1514,23 +1297,15 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 .card_box_catalog {
   width: 100%;
   margin-top: 65px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .pagination_box {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   margin-top: 18.5px;
 }
 
@@ -1549,6 +1324,14 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   text-align: center;
 }
 
+.pagination_link_first::before {
+  content: "«";
+}
+
+.pagination_link_last::before {
+  content: "»";
+}
+
 .pagination .active {
   border: 1px solid #f16d7f;
   color: #f16d7f;
@@ -1560,11 +1343,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   border-radius: 5px;
 }
 
-.fa-chevron-left,
-.fa-chevron-right {
-  color: #000000;
-}
-
 /*СТРАНИЦА РЕГИСТРАЦИИ*/
 .background_page_registration {
   background: #e5e5e5;
@@ -1573,21 +1351,13 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 }
 
 .registration_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
 
 .personalAccount_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 .registration_form {
@@ -1613,14 +1383,11 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   color: #b1b1b1;
   border: 1px solid #a4a4a4;
   width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .form_radiobutton {
   margin: 34px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -1631,8 +1398,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 }
 
 .label_buttons {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -1704,7 +1469,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   text-align: center;
   margin-top: 39px;
   padding: 0 29px;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -1765,8 +1529,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 }
 
 .cart_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -1783,10 +1545,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 .cart_product {
   width: 100%;
   background: #ffffff;
-  -webkit-filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
-          filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
-  display: -webkit-box;
-  display: -ms-flexbox;
+  filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
   display: flex;
   position: relative;
   margin-bottom: 40px;
@@ -1814,10 +1573,8 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 }
 
 .cart_link_to_product:hover {
-  -webkit-filter: brightness(90%);
-          filter: brightness(90%);
-  -webkit-box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
-          box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
+  filter: brightness(90%);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
 }
 
 .cart_product_text_box {
@@ -1847,8 +1604,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   text-align: center;
   color: #656565;
   border: 1px solid #eaeaea;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-left: 24px;
 }
 
@@ -1877,12 +1633,8 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 }
 
 .cart_product_link {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   margin-top: 72.5px;
 }
 
@@ -1897,9 +1649,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   background: #ffffff;
   border: 1px solid #a4a4a4;
   padding: 0 40px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-transition: all 0.2s ease;
+  box-sizing: border-box;
   transition: all 0.2s ease;
 }
 
@@ -1939,15 +1689,13 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   margin-top: 24px;
   padding-top: 9.5px;
   padding-bottom: 11.5px;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .checkout_box {
   margin-top: 57.5px;
   padding: 39px 34px 42px 43px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background: #f5f3f3;
   text-transform: uppercase;
   text-align: right;
@@ -1993,7 +1741,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   background-color: #f16d7f;
   display: block;
   margin-right: 9px;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -2075,38 +1822,28 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   .product_info {
     width: 100vw;
     padding: 65px 0;
-    -webkit-transform: none;
-            transform: none;
+    transform: none;
     margin-bottom: 130px;
   }
 }
-
 @media screen and (max-width: 1070px) {
   .cart_product_box {
     margin-right: 40px;
   }
   .search_field:hover #search,
-  #search:focus,
-  #search:active #search {
+#search:focus,
+#search:active #search {
     width: 500px;
   }
 }
-
 @media screen and (max-width: 980px) {
   .cart_box {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
   }
   .shipping_adress {
     margin-top: 64px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    justify-content: space-between;
     width: 100%;
   }
   .checkout_box {
@@ -2114,20 +1851,17 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
-    -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
+    align-self: center;
   }
   .cart_product_box {
     margin-right: 2px;
   }
   .search_field:hover #search,
-  #search:focus,
-  #search:active #search {
+#search:focus,
+#search:active #search {
     width: 400px;
   }
 }
-
 @media screen and (max-width: 769px) {
   /*Блок мужик с брендом справа*/
   .brand_box {
@@ -2185,26 +1919,16 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   .advantages_box {
     padding-top: 48px;
     padding-bottom: 16px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
   .advantages_card {
     margin-bottom: 48px;
     width: 360px;
   }
   .feedback_box {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    flex-direction: column;
+    align-items: center;
     padding-top: 54px;
     padding-bottom: 140px;
   }
@@ -2222,9 +1946,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     margin-left: 16px;
   }
   .filter_block {
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
+    justify-content: flex-end;
   }
   .control_padding {
     padding-right: 0;
@@ -2245,19 +1967,14 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     padding-top: 59px;
   }
   .cart_box {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
   }
   .cart_product_photo {
     width: 40vw;
   }
   .cart_product_link {
     margin-top: 62.5px;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
+    justify-content: space-evenly;
   }
   .product_link {
     padding: 0;
@@ -2279,8 +1996,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     padding-top: 40px;
   }
   .label_other {
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
     display: inline-flex;
   }
   .loyalty_heading {
@@ -2301,12 +2016,11 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     display: none;
   }
   .search_field:hover #search,
-  #search:focus,
-  #search:active #search {
+#search:focus,
+#search:active #search {
     width: 250px;
   }
 }
-
 @media screen and (max-width: 650px) {
   .brand_men {
     display: none;
@@ -2315,13 +2029,8 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     width: 100%;
   }
   .chapters_box {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
   }
   .chapters_card {
     width: 100%;
@@ -2348,13 +2057,8 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     margin-top: 32px;
   }
   .shipping_adress {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 48px;
   }
   .fieldset {
@@ -2382,16 +2086,14 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     position: absolute;
     left: 0;
     top: -24px;
-    -webkit-transition-duration: 0s;
-            transition-duration: 0s;
+    transition-duration: 0s;
   }
   .search_field:hover #search,
-  #search:focus,
-  #search:active #search {
+#search:focus,
+#search:active #search {
     width: 220px;
   }
 }
-
 @media screen and (max-width: 540px) {
   .cart_product_text_box {
     max-width: 144px;
@@ -2420,10 +2122,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     width: 44%;
   }
   .registration_box {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
   }
   .registration_form {
     margin-right: 0;
@@ -2435,7 +2134,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     margin-top: 40px;
   }
 }
-
 @media screen and (max-width: 440px) {
   .card {
     width: 100%;
@@ -2458,30 +2156,18 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     width: 100%;
   }
   .copyright {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: reverse;
-        -ms-flex-direction: column-reverse;
-            flex-direction: column-reverse;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
     min-height: 143px;
     padding: 43px 0 9px;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .breadcrumb_nav {
     padding-top: 24px;
     padding-bottom: 46px;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    box-sizing: border-box;
+    flex-direction: column;
   }
   .breadcrumb_heading {
     width: 100%;
@@ -2494,9 +2180,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   .breadcrumb_padding {
     padding-top: 0;
     padding-bottom: 0;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    justify-content: center;
   }
   /*окно с фильтром каталога слева */
   .filter_check {
@@ -2546,14 +2230,11 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     width: 100%;
   }
   .select_item,
-  .control_i_product {
+.control_i_product {
     font: 400 10px/12px "Raleway";
-    -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    flex-grow: 1;
   }
 }
-
 @media screen and (max-width: 376px) {
   .container {
     padding: 0 8px;
@@ -2679,7 +2360,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     margin-top: 32px;
   }
 }
-
 @media screen and (max-width: 280px) {
   .vertical_line {
     height: 60px;
@@ -2697,38 +2377,27 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     text-align: center;
   }
   .product_box_bottom {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
   .select_item {
     margin-bottom: 15px;
   }
   .form_radiobutton {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
   }
   .add_box {
     top: 20%;
   }
   .search_field:hover #search,
-  #search:focus,
-  #search:active #search {
+#search:focus,
+#search:active #search {
     width: 160px;
   }
 }
-
 @media screen and (max-width: 240px) {
   .brand_box_head {
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
   }
   .vertical_line {
     height: 50px;
@@ -2743,9 +2412,7 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   }
   .product_add {
     width: 96vw;
-    -webkit-box-pack: normal;
-        -ms-flex-pack: normal;
-            justify-content: normal;
+    justify-content: normal;
   }
   .product_add_text {
     padding: 0;
@@ -2758,7 +2425,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
     width: 70vw;
   }
 }
-
 /*СТИЛИ СТРАНИЦЫ ЗАКАЗОВ В АДМИНКЕ*/
 .backgroundPage_orders,
 .backgroundPage_changeCatalog {
@@ -2861,8 +2527,7 @@ table.addColorSize tr:hover td {
   text-align: center;
   color: #656565;
   border: 1px solid #eaeaea;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0 auto;
 }
 
@@ -2883,10 +2548,8 @@ table.addColorSize tr:hover td {
   background-color: #f16d7f;
   margin: 20px auto 0;
   padding: 0 10px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   cursor: pointer;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
@@ -2937,5 +2600,4 @@ table.addColorSize tr:hover td {
 .addGoodInCatalog__button {
   margin: auto auto;
   font: 300 14px/50px "Raleway";
-}
-/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */

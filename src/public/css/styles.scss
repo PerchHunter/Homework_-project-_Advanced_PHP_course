@@ -1324,6 +1324,14 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
   text-align: center;
 }
 
+.pagination_link_first::before {
+  content: "\00AB";
+}
+
+.pagination_link_last::before {
+  content: "\00BB";
+}
+
 .pagination .active {
   border: 1px solid $pink_text;
   color: $pink_text;
@@ -1333,11 +1341,6 @@ input:checked + div + input + div + input + div .carousel__arrow:before {
 .pagination_link:hover:not(.active) {
   background-color: #ddd;
   border-radius: 5px;
-}
-
-.fa-chevron-left,
-.fa-chevron-right {
-  color: #000000;
 }
 
 /*СТРАНИЦА РЕГИСТРАЦИИ*/

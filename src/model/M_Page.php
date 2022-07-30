@@ -3,10 +3,13 @@
 
 		/**
 		 * Загрузка всех товаров каталога.
-		 * Выдаёт 9 товаров.
-		 * В дальнейшем планиру сделать либо "подгрузку" товаров, либо пагинацию
 		 */
 		public function getCatalog(): array {
+			$numberOfElementsPerPage = 9; // Определяем, сколько выводить товаров на страницу
+			$pagination = $this->pagination($numberOfElementsPerPage);
+			$offset = $pagination['offset'];
+			$totalPages = $pagination['totalPages'];
+
 			try {
 				//думаю, что можно было бы сделать намного проще, но не удавалось получить нужный результат в запросе sql, поэтому пришлось использовать
 				//GROUP_CONCAT() и далее совершать эти ужасные операции с массивами в convertAnArray($data)
@@ -19,7 +22,7 @@
 						LEFT JOIN colors_of_goods cog USING (id_color) 
 						WHERE g.status = 1 
 						GROUP BY g.id_good
-						LIMIT 9 ";
+						LIMIT $offset, $numberOfElementsPerPage";
 
 				$data = DB::select($sql);
 				//Преобразуем поля размеров из цветов из вида S,M,S,L,XL,M,M в вид S,M,L,XL
@@ -29,7 +32,7 @@
 				die('Ошибка при запросе каталога: ' . $e->getMessage());
 			}
 
-			return $data;
+			return ['products' => $data, 'pagination' => $totalPages];
 		}
 
 
@@ -114,29 +117,33 @@
 
 
 		/**
-		 * Загружает товары нужной категории (мужчинам, женщинам или рубашки, аксессуары)
+		 * Загружает товары нужной категории (мужчинам, женщинам или рубашки для мужчин, аксессуары для женщин...)
 		 */
 		public function showCategoryProducts(): array {
+			$numberOfElementsPerPage = 9;
+
 			try {
 				$args =[];
 
-				if ($_GET['id_category']) { // когда нужно получить товары конкретной категории (футболки, кофты, рюкзаки...)
+				if ($_GET['id_category'] && $_GET['majorCategory']) { // когда нужно получить товары подкатегории в рамках какой-то главной категории (футболки для мужчин...)
+					$pagination = $this->pagination($numberOfElementsPerPage, (int)$_GET['majorCategory'], (int)$_GET['id_category']);
 
 					$sql = "SELECT g.id_good, id_category, name_good, price, description,  GROUP_CONCAT(size_title) AS sizes, GROUP_CONCAT(color_title) AS colors,
        						(SELECT path FROM photo_goods pg WHERE pg.id_good = g.id_good AND SUBSTR(pg.path, -6, 6) LIKE '-1.jpg' OR SUBSTR(pg.path, -7, 7) LIKE '-1.jpeg') AS path
 						FROM goods_sizes_colors_brands gscb
 						LEFT JOIN goods g USING (id_good)
 						LEFT JOIN sizes_of_goods sog USING (id_size)
-						LEFT JOIN colors_of_goods cog USING (id_color) 
-						WHERE g.id_category = ? AND g.status = 1 
+						LEFT JOIN colors_of_goods cog USING (id_color)
+						WHERE g.id_category = ? AND g.status = 1
 						GROUP BY g.id_good
-						LIMIT 9 ";
+						LIMIT $pagination[offset], $numberOfElementsPerPage ";
 
 					$args[] = $_GET['id_category'];
 				}
 				else { // когда нужны товары главной категории (мужчинам, женщинам, детям...)
-					if ($_GET['category'] === 'Аксессуары') {
+					$pagination = $this->pagination($numberOfElementsPerPage, (int)$_GET['majorCategory'] );
 
+					if ($_GET['category'] === 'Аксессуары') {
 						$sql = "SELECT views, g.id_good, id_category, name_good, price, description,  GROUP_CONCAT(size_title) AS sizes, GROUP_CONCAT(color_title) AS colors,
        						(SELECT path FROM photo_goods pg WHERE pg.id_good = g.id_good AND SUBSTR(pg.path, -6, 6) LIKE '-1.jpg' OR SUBSTR(pg.path, -7, 7) LIKE '-1.jpeg') AS path
 						FROM goods_sizes_colors_brands gscb
@@ -147,7 +154,7 @@
 						WHERE c.category_title = ? AND g.status = 1 
 						GROUP BY g.id_good 
 						ORDER BY g.views DESC 
-						LIMIT 9";
+						LIMIT $pagination[offset], $numberOfElementsPerPage";
 
 						$args[] = $_GET['category'];
 					}
@@ -163,7 +170,7 @@
 						WHERE c.id_major_category = ? AND g.status = 1 
 						GROUP BY g.id_good 
 						ORDER BY g.views DESC 
-						LIMIT 9";
+						LIMIT $pagination[offset], $numberOfElementsPerPage";
 
 						$args[] = $_GET['majorCategory'];
 					}
@@ -179,7 +186,8 @@
 				die('Ошибка при запросе каталога: ' . $e->getMessage());
 			}
 
-			return $data;
+			$totalPages = $pagination['totalPages'];
+			return ['products' => $data, 'pagination' => $totalPages];
 		}
 
 
@@ -198,7 +206,6 @@
 						GROUP BY g.id_good
 						ORDER BY g.views DESC
 						LIMIT 3 ";
-
 
 				$data = DB::select($sql, [$idCategory, $_GET['id']]);
 				$data = $this->convertAnArray($data);
@@ -252,5 +259,43 @@
 			}
 
 			return $data;
+		}
+
+		/**
+		 * @param int $numberOfElementsPerPage количество элементов на странице
+		 * @param int $major_category главная категория (мужчинам, женщинам ...)
+		 * @param int $subcategory подкатегория (футболки, джинсы, сумки ...)
+		 * @param int $status статус товара в БД (1 - в наличии, 2 - нет на складе)
+		 *
+		 * @return array (offset - смещение, totalPages - кол-во страниц пагинации)
+		 */
+		private function pagination(int $numberOfElementsPerPage, int $major_category = 0, int $subcategory = 0, int $status = 1) : array {
+			if ($major_category && $subcategory) {
+				$sql = "SELECT COUNT(*) AS totalProducts FROM goods WHERE status = ? AND major_category = ? AND id_category = ?";
+				$args = [$status, $major_category, $subcategory];
+			}
+			elseif ($major_category && !$subcategory) {
+				$sql = "SELECT COUNT(*) AS totalProducts FROM goods WHERE status = ? AND major_category = ?";
+				$args = [$status, $major_category];
+			}
+			else {
+				$sql = "SELECT COUNT(*) AS totalProducts FROM goods WHERE status = ? ";
+				$args = [$status];
+			}
+
+			try {
+				$data = DB::getRow($sql, $args);
+			}
+			catch (PDOException $e) {
+				die('Не получена информация о товарах (пагинация): ' . $e->getMessage());
+			}
+
+			$totalPages = ceil($data['totalProducts'] / $numberOfElementsPerPage);
+
+			if ((int)$_GET['page'] > 0 && (int)$_GET['page'] <= $totalPages) $page = (int)$_GET['page'];
+			else $page = 1;
+
+			$offset = ($page - 1) * $numberOfElementsPerPage;
+			return ['offset' => $offset, 'totalPages' => $totalPages];
 		}
 	}

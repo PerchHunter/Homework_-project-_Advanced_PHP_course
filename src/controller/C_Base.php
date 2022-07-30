@@ -8,6 +8,7 @@
 	{
 		protected string $title;		   // текст для тега title раздела head
 		protected array $breadcrumb;       // для хлебных крошек
+		protected int $pagination;         // для пагинации
 		protected string $message;         // сообщения пользователю (например, что аккаунт с такими логином и почтой уже существует )
 		protected string $error;           // сообщения ошибок
 		protected $cartForAuth;            // кол-во товаров в корзине для зарегистрированного пользователя (int|null)
@@ -19,6 +20,7 @@
 		{
 			$this->title = Config::get('siteName');
 			$this->breadcrumb = [];
+			$this->pagination = 0;
 			$this->message = '';
 			$this->error = '';
 			$this->cartForAuth = $_COOKIE['cartForAuth'];
@@ -35,13 +37,13 @@
 		 */
 		public function render(): void
 		{
-			$vars = array('title' => $this->title, 'breadcrumb' => $this->breadcrumb, 'message' => $this->message, 'content' => $this->content, 'error' => $this->error, 'cartForAuth' => $this->cartForAuth);
+			$vars = array('title' => $this->title, 'breadcrumb' => $this->breadcrumb, 'pagination' => $this->pagination, 'message' => $this->message, 'content' => $this->content, 'error' => $this->error, 'cartForAuth' => $this->cartForAuth);
 			$loader = new FilesystemLoader(Config::get('path_views'));
 			$twig = new Environment($loader);
 			$twig->addGlobal('cookie', $_COOKIE); //установил глобальные переменные. Теперь куки, гет-параметры и пар-ры сессии доступны в любом месте шаблона
 			$twig->addGlobal('get', $_GET);
 			$twig->addGlobal('session', $_SESSION);
-			// print_r($_SESSION);
+
 //			print_r($this->content); // посмотреть что у нас выдаёт сервер
 			echo  $twig->render($this->template, $vars);
 		}
