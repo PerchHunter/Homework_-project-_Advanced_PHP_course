@@ -238,6 +238,34 @@
 			return json_encode($result);
 		}
 
+		/**
+		 *  поиск товаров с помощью поля поиска
+		 */
+		public function searchProducts(): array {
+			$requestText = (string)htmlspecialchars(strip_tags($_GET['requestText']));
+			$numberOfElementsPerPage = 9;
+			$pagination = $this->pagination($numberOfElementsPerPage, 0, 0, $requestText);
+
+			try {
+				$sql = "SELECT g.id_good, id_category,  name_good, price, description,  GROUP_CONCAT(size_title) AS sizes, GROUP_CONCAT(color_title) AS colors,
+       						(SELECT path FROM photo_goods pg WHERE pg.id_good = g.id_good AND SUBSTR(pg.path, -6, 6) LIKE '-1.jpg' OR SUBSTR(pg.path, -7, 7) LIKE '-1.jpeg') AS path
+						FROM goods_sizes_colors_brands gscb
+						LEFT JOIN goods g USING (id_good)
+						LEFT JOIN sizes_of_goods sog USING (id_size)
+						LEFT JOIN colors_of_goods cog USING (id_color) 
+						WHERE g.status = 1 AND g.name_good LIKE '%$requestText%' OR g.description LIKE '%$requestText%'
+						GROUP BY g.id_good
+						LIMIT $pagination[offset], $numberOfElementsPerPage";
+
+				$data = DB::select($sql);
+			}
+			catch (PDOException $e) {
+				die('Ошибка во время поиска товаров: ' . $e->getMessage());
+			}
+
+			$totalPages = $pagination['totalPages'];
+			return ['products' => $data, 'pagination' => $totalPages];
+		}
 
 		/**
 		 * Преобразует поля colors и sizes из вида 'M,L,M,L,M' в отсортированные строки с уникальными значениями 'L,M'
@@ -269,7 +297,7 @@
 		 *
 		 * @return array (offset - смещение, totalPages - кол-во страниц пагинации)
 		 */
-		private function pagination(int $numberOfElementsPerPage, int $major_category = 0, int $subcategory = 0, int $status = 1) : array {
+		private function pagination(int $numberOfElementsPerPage, int $major_category = 0, int $subcategory = 0, string $search = '', int $status = 1) : array {
 			if ($major_category && $subcategory) {
 				$sql = "SELECT COUNT(*) AS totalProducts FROM goods WHERE status = ? AND major_category = ? AND id_category = ?";
 				$args = [$status, $major_category, $subcategory];
@@ -277,6 +305,10 @@
 			elseif ($major_category && !$subcategory) {
 				$sql = "SELECT COUNT(*) AS totalProducts FROM goods WHERE status = ? AND major_category = ?";
 				$args = [$status, $major_category];
+			}
+			elseif ($search) {
+				$sql = "SELECT COUNT(*) AS totalProducts FROM goods WHERE status = ? AND name_good LIKE ?";
+				$args = [$status, "%$search%"];
 			}
 			else {
 				$sql = "SELECT COUNT(*) AS totalProducts FROM goods WHERE status = ? ";

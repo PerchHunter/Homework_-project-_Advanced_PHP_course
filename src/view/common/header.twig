@@ -23,9 +23,9 @@
             <a href="index.php" class="logo"
             ><img src="images/different_image/logo.svg" alt="logo"
                 /></a>
-            <form action="#" class="search_field" id="header_search">
+            <form action="#" method="post" enctype="text/plain" class="search_field" id="header_search">
                 <button
-                        class="button_search_field"
+                        class="button_search_field js-search"
                         type="button"
                         form="header_search"
                 >
@@ -34,8 +34,9 @@
                 <input
                         type="search"
                         id="search"
-                        placeholder="Enter the product name..."
+                        placeholder="Введите название товара..."
                         autocomplete="off"
+                        form="header_search"
                 />
             </form>
         </div>

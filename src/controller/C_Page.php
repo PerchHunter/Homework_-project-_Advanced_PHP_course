@@ -44,7 +44,7 @@ class C_Page extends C_Base
 		$this->breadcrumb = ['title' => 'Каталог'];
 		$this->pagination = $data['pagination'];
 		$this->content = $data['products'];
-		$this->message = count($this->content) ? '' : 'Товары этой категории скоро будут добавлены :)';
+		$this->message = count($this->content) ? '' : 'Товары этой категории скоро будут добавлены';
 		$this->template = 'catalog/catalog.twig';
 	}
 
@@ -62,5 +62,17 @@ class C_Page extends C_Base
 		$this->title .= ' | ' . $this->content['good']['name_good'];
 		$this->breadcrumb = ['title' => $this->content['good']['title_major_category']];
 		$this->template = 'good/good.twig';
+	}
+
+	public function action_searchProducts(): void
+	{
+		$data = $this->page->searchProducts();
+
+		$this->title .= ' | Поиск';
+		$this->breadcrumb = ['title' => 'Поиск'];
+		$this->pagination = $data['pagination'];
+		$this->content = $data['products'];
+		$this->message = count($this->content) ? '' : 'Товары не найдены';
+		$this->template = 'catalog/catalog.twig';
 	}
 }

@@ -167,13 +167,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 //КОНЕЦ УПРАВЛЕНИЯ МОДАЛЬНЫМИ ОКНАМИ
 
+// кнопка поля поиска
+const searchButton = document.querySelector('.js-search');
+const inputSearch = document.querySelector('input[id=search]');
+searchButton.addEventListener('click', () => {
+    window.location.href = `index.php?c=page&act=searchProducts&requestText=${inputSearch.value.trim()}`;
+});
+
+inputSearch.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        window.location.href = `index.php?c=page&act=searchProducts&requestText=${inputSearch.value.trim()}`;
+    }
+})
+
 
 // валидация полей ввода информации
 const fieldsValidation = document.querySelectorAll('.js-field-validation');
 fieldsValidation.forEach(field => {
     //функция в файле fieldValidation
     field.addEventListener('input', fieldValidation.bind(field));
-})
+});
 
 // крестики на карточках товара в корзине
 const deleteGoodFromCartButtons = document.querySelectorAll('.cart_product .fa-times');

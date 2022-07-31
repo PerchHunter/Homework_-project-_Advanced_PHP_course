@@ -1,54 +1,35 @@
 <div class="pagination_box">
+    <nav class="pagination">
+
     {% if not get.majorCategory and not get.id_category %}
         {# Показываем все товары каталога #}
-        <nav class="pagination">
-            <a class="pagination_link pagination_link_first" href="?c=page&act=getCatalog&page=1"></a>
-
-            {% for i in 1..pagination %}
-                {% if get.page == null and i == 1 %}
-                    <a class="pagination_link active" href="?c=page&act=getCatalog&page=1">1</a>
-                {% else %}
-                    <a class="pagination_link
-                    {{ get.page == i ? 'active' }}
-                    " href="?c=page&act=getCatalog&page={{ i }}">{{ i }}</a>
-                {% endif %}
-            {% endfor %}
-
-            <a class="pagination_link pagination_link_last" href="?c=page&act=getCatalog&page={{ pagination }}"></a>
-        </nav>
+        {% set firstPage = "?c=page&act=getCatalog&page=1" %}
+        {% set intermediatePages = "?c=page&act=getCatalog&page=" %}
+        {% set lastPage = "?c=page&act=getCatalog&page=" ~ pagination %}
     {% elseif get.majorCategory and  not get.id_category %}
         {# Показываем товары какой-то главной категории (мужчинам, женщинам...) #}
-        <nav class="pagination">
-            <a class="pagination_link pagination_link_first" href="?c=page&act=showCategoryProducts&category={{ get.category }}&majorCategory={{ get.majorCategory }}&page=1"></a>
-
-            {% for i in 1..pagination %}
-                {% if get.page == null and i == 1 %}
-                    <a class="pagination_link active" href="?c=page&act=showCategoryProducts&category={{ get.category }}&majorCategory={{ get.majorCategory }}&page=1">1</a>
-                {% else %}
-                    <a class="pagination_link
-                    {{ get.page == i ? 'active' }}
-                    " href="?c=page&act=showCategoryProducts&category={{ get.category }}&majorCategory={{ get.majorCategory }}&page={{ i }}">{{ i }}</a>
-                {% endif %}
-            {% endfor %}
-
-            <a class="pagination_link pagination_link_last" href="?c=page&act=showCategoryProducts&category={{ get.category }}&majorCategory={{ get.majorCategory }}&page={{ pagination }}"></a>
-        </nav>
+        {% set firstPage = "?c=page&act=showCategoryProducts&category=" ~ get.category ~ "&majorCategory=" ~ get.majorCategory ~ "&page=1" %}
+        {% set intermediatePages = "?c=page&act=showCategoryProducts&category=" ~ get.category ~ "&majorCategory=" ~ get.majorCategory ~ "&page=" %}
+        {% set lastPage = "?c=page&act=showCategoryProducts&category=" ~ get.category ~ "&majorCategory=" ~ get.majorCategory ~ "&page=" ~ pagination %}
     {% elseif get.majorCategory and get.id_category%}
         {# Показываем товары какой-то подкатегории (футболки, джинсы...) #}
-        <nav class="pagination">
-            <a class="pagination_link pagination_link_first" href="?c=page&act=showCategoryProducts&category={{ get.category }}&majorCategory={{ get.majorCategory }}&id_category={{ get.id_category }}&page=1"></a>
-
-            {% for i in 1..pagination %}
-                {% if get.page == null and i == 1 %}
-                    <a class="pagination_link active" href="?c=page&act=showCategoryProducts&category={{ get.category }}&majorCategory={{ get.majorCategory }}&id_category={{ get.id_category }}&page=1">1</a>
-                {% else %}
-                    <a class="pagination_link
-                    {{ get.page == i ? 'active' }}
-                    " href="?c=page&act=showCategoryProducts&category={{ get.category }}&majorCategory={{ get.majorCategory }}&id_category={{ get.id_category }}&page={{ i }}">{{ i }}</a>
-                {% endif %}
-            {% endfor %}
-
-            <a class="pagination_link pagination_link_last" href="?c=page&act=showCategoryProducts&category={{ get.category }}&majorCategory={{ get.majorCategory }}&id_category={{ get.id_category }}&page={{ pagination }}"></a>
-        </nav>
+        {% set firstPage = "?c=page&act=showCategoryProducts&category=" ~ get.category ~ "&majorCategory=" ~ get.majorCategory ~ "&id_category=" ~ get.id_category ~ "&page=1" %}
+        {% set intermediatePages = "?c=page&act=showCategoryProducts&category=" ~ get.category ~ "&majorCategory=" ~ get.majorCategory ~ "&id_category=" ~ get.id_category ~ "&page=" %}
+        {% set lastPage = "?c=page&act=showCategoryProducts&category=" ~ get.category ~ "&majorCategory=" ~ get.majorCategory ~ "&id_category=" ~ get.id_category ~ "&page=" ~ pagination %}
     {% endif %}
+
+        <a class="pagination_link pagination_link_first" href="{{ firstPage }}"></a>
+
+        {% for i in 1..pagination %}
+            {% if get.page == null and i == 1 %}
+                <a class="pagination_link active" href="{{ firstPage }}">1</a>
+            {% else %}
+                <a class="pagination_link
+                    {{ get.page == i ? 'active' }}
+                    " href="{{ intermediatePages ~ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        <a class="pagination_link pagination_link_last" href="{{ lastPage }}"></a>
+    </nav>
 </div>
